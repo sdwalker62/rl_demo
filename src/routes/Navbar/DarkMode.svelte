@@ -13,7 +13,8 @@
 	}
 
 	function switchToDark() {
-		document.getElementById('main-dark-light-switch').checked = false;
+		const switch_element = document.getElementById('main-dark-light-switch');
+		switch_element.checked = false;
 	}
 
 	function switchToLight() {
