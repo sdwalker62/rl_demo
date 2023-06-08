@@ -1,9 +1,11 @@
 <script>
 	import NavBar from './Navbar/NavBar.svelte';
+	import Environment from './Environment/Environment.svelte';
 </script>
 
 <div class="canvas">
 	<NavBar />
+	<Environment />
 </div>
 
 <style>
