@@ -102,14 +102,20 @@ export class TransitionMatrix {
 		for (let state_idx = 0; state_idx < this.n_elements; state_idx++) {
 			if (_.indexOf(obstacles, state_idx) === -1) {
 				for (let c_state_idx = 0; c_state_idx < this.n_elements; c_state_idx++) {
+					let adj_info = this.check_adjacency(state_idx, c_state_idx);
 					if (_.indexOf(obstacles, c_state_idx) === -1) {
-						let adj_info = this.check_adjacency(state_idx, c_state_idx);
 						if (adj_info.adj) {
 							if (adj_info.dir === 'up') state_matrix[state_idx][c_state_idx] = up_prob;
 							else if (adj_info.dir === 'right') state_matrix[state_idx][c_state_idx] = right_prob;
 							else if (adj_info.dir === 'down') state_matrix[state_idx][c_state_idx] = down_prob;
 							else state_matrix[state_idx][c_state_idx] = left_prob;
 						}
+					} else {
+						// collision with an obstacle state
+						if (adj_info.dir === 'up') state_matrix[state_idx][state_idx] += up_prob;
+						else if (adj_info.dir === 'right') state_matrix[state_idx][state_idx] += right_prob;
+						else if (adj_info.dir === 'down') state_matrix[state_idx][state_idx] += down_prob;
+						else state_matrix[state_idx][state_idx] += left_prob;
 					}
 				}
 			}
