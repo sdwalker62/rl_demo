@@ -89,6 +89,7 @@ export class TransitionMatrix {
 	 * @param {number} right_prob
 	 * @param {number} down_prob
 	 * @param {number} left_prob
+	 * @param {Array<number>} obstacles
 	 * @returns
 	 */
 	uniform_populate_state_matrix(
@@ -115,31 +116,40 @@ export class TransitionMatrix {
 						if (adj_info.dir === 'up') state_matrix[state_idx][state_idx] += up_prob;
 						else if (adj_info.dir === 'right') state_matrix[state_idx][state_idx] += right_prob;
 						else if (adj_info.dir === 'down') state_matrix[state_idx][state_idx] += down_prob;
-						else state_matrix[state_idx][state_idx] += left_prob;
+						else if (adj_info.dir === 'left') state_matrix[state_idx][state_idx] += left_prob;
 					}
 				}
-			}
-			// Collision logic
-			// 1. Check for first row collisions
-			if (this.get_row_idx(state_idx) === 0) {
-				state_matrix[state_idx][state_idx] += up_prob;
-			}
+				// Collision logic
+				// 1. Check for first row collisions
+				if (this.get_row_idx(state_idx) === 0) {
+					state_matrix[state_idx][state_idx] += up_prob;
+				}
 
-			// 2. Check for first column collisions
-			if (this.get_col_idx(state_idx) === 0) {
-				state_matrix[state_idx][state_idx] += left_prob;
-			}
+				// 2. Check for first column collisions
+				if (this.get_col_idx(state_idx) === 0) {
+					state_matrix[state_idx][state_idx] += left_prob;
+				}
 
-			// 3. Check for last row collisions
-			if (this.get_row_idx(state_idx) === this.n_states - 1) {
-				state_matrix[state_idx][state_idx] += down_prob;
-			}
+				// 3. Check for last row collisions
+				if (this.get_row_idx(state_idx) === this.n_states - 1) {
+					state_matrix[state_idx][state_idx] += down_prob;
+				}
 
-			// 4. Check for last column collisions
-			if (this.get_col_idx(state_idx) === this.n_states - 1) {
-				state_matrix[state_idx][state_idx] += right_prob;
+				// 4. Check for last column collisions
+				if (this.get_col_idx(state_idx) === this.n_states - 1) {
+					state_matrix[state_idx][state_idx] += right_prob;
+				}
+
+				// verify that this row is a valid probability distribution
+				let sum = _.sum(state_matrix[state_idx]);
+				if (sum != 1) {
+					throw new Error(
+						`State ${state_idx} has an improper action probability distribution! Sum equals ${sum}. Row is ${state_matrix[state_idx]}.`
+					);
+				}
 			}
 		}
+
 		return state_matrix;
 	}
 }
