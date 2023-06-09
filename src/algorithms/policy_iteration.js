@@ -1,7 +1,25 @@
 import { TransitionMatrix } from './transition_matrix';
 import _ from 'lodash';
 
+/**
+ * Class containing logic for PI. Will eventually extend the Strategy class.
+ * Find more information from Sutton and Barto or
+ * https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume4/kaelbling96a-html/node20.html#:~:text=The%20policy%20iteration%20algorithm%20manipulates,solve%20the%20linear%20equations
+ */
 export class PolicyIteration {
+	/**
+	 *
+	 * @param {number} n_states - Total number of system states
+	 * @param {Object} mechanics - The transition mechanics for this environment
+	 * @param {number} gamma - Learning rate
+	 * @param {number} theta - The convergence threshold
+	 * @param {number} initial_value - The state-value functions initial value
+	 * @param {string} initial_action - The policies default action
+	 * @param {Array<number>} terminal_states - Set of states that terminate the environment upon transition
+	 * @param {Array<Object>} goal_states -  A set of states with positive reward
+	 * @param {Array<Object>} penalty_states - A set of states with negative reward
+	 * @param {number} action_cost - traversal utility cost
+	 */
 	constructor(
 		n_states,
 		mechanics,
@@ -29,6 +47,11 @@ export class PolicyIteration {
 		}
 	}
 
+	/**
+	 *
+	 * @param {number} state - index of state in the state array
+	 * @returns the utility of transitioning to this state
+	 */
 	get_reward(state) {
 		if (_.indexOf(Object.keys(this.goal_states), String(state)) != -1) {
 			return 100;
@@ -39,6 +62,10 @@ export class PolicyIteration {
 		}
 	}
 
+	/**
+	 *
+	 * @param {number} max_iterations - cap the total number of iterations to stop run away loops
+	 */
 	policy_evaluation(max_iterations) {
 		for (let eval_iter = 0; eval_iter < max_iterations; eval_iter++) {
 			let delta = 0;
@@ -77,6 +104,10 @@ export class PolicyIteration {
 		}
 	}
 
+	/**
+	 *
+	 * @param {number} max_iterations - cap the total number of iterations to stop run away loops
+	 */
 	solve(max_iterations) {
 		for (let iterations = 0; iterations < max_iterations; iterations++) {
 			console.log('iterating!');
