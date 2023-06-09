@@ -135,8 +135,8 @@ export class PolicyIteration {
 				}
 			}
 			const history_frame = {
-				state_values: this.state_values,
-				policy: this.policy
+				state_values: Object.assign({}, this.state_values),
+				policy: Object.assign({}, this.policy)
 			};
 			this.history.push(history_frame);
 			if (!policy_stable) {
