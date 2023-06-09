@@ -30,10 +30,12 @@
 			left: 0.8
 		};
 		const obstacles = [2];
-		let up_transition_matrix = new TransitionMatrix(n_states, up_probs, obstacles);
-		let right_transition_matrix = new TransitionMatrix(n_states, right_probs, obstacles);
-		let down_transition_matrix = new TransitionMatrix(n_states, down_probs, obstacles);
-		let left_transition_matrix = new TransitionMatrix(n_states, left_probs, obstacles);
+		const n_rows = 4;
+		const n_cols = 5;
+		let up_transition_matrix = new TransitionMatrix(n_rows, n_cols, up_probs, obstacles);
+		let right_transition_matrix = new TransitionMatrix(n_rows, n_cols, right_probs, obstacles);
+		let down_transition_matrix = new TransitionMatrix(n_rows, n_cols, down_probs, obstacles);
+		let left_transition_matrix = new TransitionMatrix(n_rows, n_cols, left_probs, obstacles);
 
 		let mechanics = {
 			up: up_transition_matrix,
