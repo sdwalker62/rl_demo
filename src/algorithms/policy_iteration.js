@@ -1,4 +1,3 @@
-import { transformWithEsbuild } from 'vite';
 import { TransitionMatrix } from './transition_matrix';
 import _ from 'lodash';
 
@@ -9,7 +8,6 @@ export class PolicyIteration {
 		gamma,
 		theta,
 		initial_value,
-		max_eval_iters,
 		initial_action,
 		terminal_states,
 		goal_states,
@@ -19,7 +17,6 @@ export class PolicyIteration {
 		this.mechanics = mechanics;
 		this.gamma = gamma;
 		this.theta = theta;
-		this.max_eval_iters = max_eval_iters;
 		this.n_states = n_states;
 		this.goal_states = goal_states;
 		this.penalty_states = penalty_states;
@@ -41,8 +38,8 @@ export class PolicyIteration {
 		}
 	}
 
-	policy_evaluation() {
-		for (let eval_iter = 0; eval_iter < this.max_eval_iters; eval_iter++) {
+	policy_evaluation(max_iterations) {
+		for (let eval_iter = 0; eval_iter < max_iterations; eval_iter++) {
 			let delta = 0;
 			for (let state_idx = 0; state_idx < this.n_states; state_idx++) {
 				let temp_v = this.state_values[state_idx];
@@ -77,8 +74,8 @@ export class PolicyIteration {
 		}
 	}
 
-	policy_improvement() {
-		for (let iterations = 0; iterations < this.max_eval_iters; iterations++) {
+	solve(max_iterations) {
+		for (let iterations = 0; iterations < max_iterations; iterations++) {
 			let policy_stable = true;
 			for (let state_idx = 0; state_idx < this.n_states; state_idx++) {
 				let old_action = this.policy[state_idx];
@@ -103,7 +100,7 @@ export class PolicyIteration {
 				}
 			}
 			if (!policy_stable) {
-				this.policy_evaluation();
+				this.policy_evaluation(max_iterations);
 			} else {
 				break;
 			}

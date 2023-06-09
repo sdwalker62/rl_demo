@@ -1,5 +1,6 @@
 <script>
 	import { TransitionMatrix } from '../../algorithms/transition_matrix';
+	import { PolicyIteration } from '../../algorithms/policy_iteration';
 
 	function createMatrix() {
 		const n_states = 3;
@@ -27,16 +28,53 @@
 			down: 0.1,
 			left: 0.8
 		};
-		const obstacles = [3];
+		const obstacles = [2];
 		let up_transition_matrix = new TransitionMatrix(n_states, up_probs, obstacles);
 		let right_transition_matrix = new TransitionMatrix(n_states, right_probs, obstacles);
 		let down_transition_matrix = new TransitionMatrix(n_states, down_probs, obstacles);
 		let left_transition_matrix = new TransitionMatrix(n_states, left_probs, obstacles);
 
-		console.log(up_transition_matrix.matrix);
-		console.log(right_transition_matrix.matrix);
-		console.log(down_transition_matrix.matrix);
-		console.log(left_transition_matrix.matrix);
+		let mechanics = {
+			up: up_transition_matrix,
+			right: right_transition_matrix,
+			down: down_transition_matrix,
+			left: left_transition_matrix
+		};
+
+		const gamma = 0.9;
+		const theta = 0.001;
+		const initial_value = 0;
+		const initial_action = 'up';
+		const terminal_states = [5];
+		const goal_states = [
+			{
+				5: 100
+			}
+		];
+
+		const penalty_states = [
+			{
+				7: -100
+			}
+		];
+
+		const action_cost = -1;
+
+		let strategy = new PolicyIteration(
+			n_states,
+			mechanics,
+			gamma,
+			theta,
+			initial_value,
+			initial_action,
+			terminal_states,
+			goal_states,
+			penalty_states,
+			action_cost
+		);
+
+		strategy.solve(100);
+		console.log(strategy.state_values);
 	}
 </script>
 
