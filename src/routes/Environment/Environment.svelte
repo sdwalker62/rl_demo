@@ -126,13 +126,11 @@
 
 <style>
 	.canvas {
-		width: 100%;
+		width: 80%;
 		height: 100%;
 	}
 	.gridworld-row {
 		display: flex;
 		flex-direction: row;
-		/* margin: 0.01em;
-		gap: 0.01em; */
 	}
 </style>

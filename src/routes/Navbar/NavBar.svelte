@@ -15,9 +15,9 @@
 		justify-content: space-between;
 		background-color: var(--secondary-color);
 		width: calc(100% - 20px);
-		height: 3em;
-		margin: 10px;
-		border-radius: 8px;
+		height: 40px;
+		margin: 5px;
+		border-radius: 1px;
 	}
 
 	#title {

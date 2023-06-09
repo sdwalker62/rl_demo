@@ -67,8 +67,8 @@
 	}
 
 	label {
-		width: 45px;
-		height: 20px;
+		width: 35px;
+		height: 14px;
 		display: flex;
 		border-radius: 50px;
 		align-items: center;
@@ -83,23 +83,23 @@
 	}
 
 	.ball {
-		width: 17px;
-		height: 17px;
+		width: 12px;
+		height: 12px;
 		position: absolute;
-		top: 1.4px;
-		left: 2px;
+		top: 1.1px;
+		left: 3px;
 		border-radius: 50%;
 		background: var(--slider-ball);
 		transition: transform 0.1s linear;
 	}
 
 	#main-dark-light-switch:checked + label .ball {
-		transform: translateX(23px);
+		transform: translateX(18px);
 	}
 
 	i {
 		color: #e0e0e0;
-		font-size: 9pt;
+		font-size: 7pt;
 		transition: var(--transition);
 	}
 </style>

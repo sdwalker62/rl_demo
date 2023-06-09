@@ -1,12 +1,14 @@
 <script>
 	import NavBar from './Navbar/NavBar.svelte';
 	import Environment from './Environment/Environment.svelte';
+	import AlgorithmPanel from './AlgorithmPanel/AlgorithmPanel.svelte';
 </script>
 
 <div class="canvas">
 	<NavBar />
 	<div class="board">
 		<Environment />
+		<AlgorithmPanel />
 	</div>
 </div>
 
@@ -14,17 +16,17 @@
 	.canvas {
 		display: flex;
 		flex-direction: column;
-		height: 100%;
 		margin: 0;
 		padding: 0;
+		height: 100vh;
+		width: 100vw;
+		max-height: 100vh;
+		max-width: 100vw;
 	}
 	.board {
-		width: 80vw;
-		height: 90vh;
-		max-height: 70vh;
-		max-width: 80vw;
 		margin-left: 1em;
 		display: flex;
 		flex-direction: row;
+		max-height: calc(100vh - 50px);
 	}
 </style>
