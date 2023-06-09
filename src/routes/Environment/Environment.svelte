@@ -1,10 +1,21 @@
 <script>
 	import { TransitionMatrix } from '../../algorithms/transition_matrix';
 	import { PolicyIteration } from '../../algorithms/policy_iteration';
+	import Tile from './Tiles/Tile.svelte';
+
+	let n_cols = 4;
+	let n_rows = 3;
+	let grid_world = Array.from(Array(n_rows), (_) => Array(n_cols).fill(0));
+
+	let larger_axis;
+	if (n_cols > n_rows) {
+		larger_axis = n_cols;
+	} else {
+		larger_axis = n_rows;
+	}
+	const size = 100 / larger_axis;
 
 	function createMatrix() {
-		const n_states = 3;
-		const n_elements = 9;
 		const up_probs = {
 			up: 0.8,
 			right: 0.1,
@@ -30,8 +41,9 @@
 			left: 0.8
 		};
 		const obstacles = [2];
-		const n_rows = 4;
+		const n_rows = 5;
 		const n_cols = 5;
+		const n_elements = n_rows * n_cols;
 		let up_transition_matrix = new TransitionMatrix(n_rows, n_cols, up_probs, obstacles);
 		let right_transition_matrix = new TransitionMatrix(n_rows, n_cols, right_probs, obstacles);
 		let down_transition_matrix = new TransitionMatrix(n_rows, n_cols, down_probs, obstacles);
@@ -80,4 +92,24 @@
 	}
 </script>
 
-<button on:click={createMatrix}> Build Matrix </button>
+<!-- <button on:click={createMatrix}> Build Matrix </button> -->
+<div class="canvas">
+	{#each grid_world as row}
+		<div class="gridworld-row" style="height: {size}%; width: {n_cols * size}%">
+			{#each row as state}
+				<Tile {size} />
+			{/each}
+		</div>
+	{/each}
+</div>
+
+<style>
+	.canvas {
+		width: 100%;
+		height: 90vh;
+	}
+	.gridworld-row {
+		display: flex;
+		flex-direction: row;
+	}
+</style>

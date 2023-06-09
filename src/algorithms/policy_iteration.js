@@ -2,7 +2,7 @@ import { TransitionMatrix } from './transition_matrix';
 import _ from 'lodash';
 
 /**
- * Class containing logic for PI. Will eventually extend the Strategy class.
+ * Class containing logic for Policy Iteration. Will eventually extend the Strategy class.
  * Find more information from Sutton and Barto or
  * https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume4/kaelbling96a-html/node20.html#:~:text=The%20policy%20iteration%20algorithm%20manipulates,solve%20the%20linear%20equations
  */
@@ -110,7 +110,6 @@ export class PolicyIteration {
 	 */
 	solve(max_iterations) {
 		for (let iterations = 0; iterations < max_iterations; iterations++) {
-			console.log('iterating!');
 			let policy_stable = true;
 			for (let state_idx = 0; state_idx < this.n_states; state_idx++) {
 				let old_action = this.policy[state_idx];
@@ -134,7 +133,6 @@ export class PolicyIteration {
 					policy_stable = false;
 				}
 			}
-			console.log(policy_stable);
 			if (!policy_stable) {
 				this.policy_evaluation(max_iterations);
 			} else {
