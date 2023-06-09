@@ -76,4 +76,37 @@ export class PolicyIteration {
 			}
 		}
 	}
+
+	policy_improvement() {
+		for (let iterations = 0; iterations < this.max_eval_iters; iterations++) {
+			let policy_stable = true;
+			for (let state_idx = 0; state_idx < this.n_states; state_idx++) {
+				let old_action = this.policy[state_idx];
+				let best_action;
+				let max_action_value = -1;
+				for (const action of Object.keys(this.mechanics)) {
+					let probability_matrix = this.mechanics[action];
+					let action_value = 0;
+					for (let c_state_idx = 0; c_state_idx < this.n_states; c_state_idx++) {
+						const potential_reward =
+							this.get_reward(c_state_idx) + this.gamma * this.state_values[c_state_idx];
+						action_value += probability_matrix[c_state_idx] * potential_reward;
+					}
+					if (action_value > max_action_value) {
+						best_action = action;
+						max_action_value = action_value;
+					}
+				}
+				this.policy[state_idx] = best_action;
+				if (best_action === old_action) {
+					policy_stable = false;
+				}
+			}
+			if (!policy_stable) {
+				this.policy_evaluation();
+			} else {
+				break;
+			}
+		}
+	}
 }
