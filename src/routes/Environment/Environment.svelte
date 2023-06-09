@@ -4,6 +4,7 @@
 
 	function createMatrix() {
 		const n_states = 3;
+		const n_elements = 9;
 		const up_probs = {
 			up: 0.8,
 			right: 0.1,
@@ -46,22 +47,21 @@
 		const initial_value = 0;
 		const initial_action = 'up';
 		const terminal_states = [5];
-		const goal_states = [
-			{
-				5: 100
+		const goal_states = {
+			5: {
+				reward: 100
 			}
-		];
-
-		const penalty_states = [
-			{
-				7: -100
+		};
+		const penalty_states = {
+			7: {
+				reward: -100
 			}
-		];
+		};
 
 		const action_cost = -1;
 
 		let strategy = new PolicyIteration(
-			n_states,
+			n_elements,
 			mechanics,
 			gamma,
 			theta,
