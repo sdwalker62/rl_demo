@@ -1,11 +1,27 @@
 <script>
-	export let size;
+	import Goal from './Goal.svelte';
+	import Obstacle from './Obstacle.svelte';
+	import Standard from './Standard.svelte';
+
+	export let state;
+
+	let value = state.value;
 </script>
 
-<div class="canvas" style="width: {100}%; height: {100}%" />
+<div class="canvas" style="width: {100}%; height: {100}%">
+	{#if state.type === 'standard'}
+		<Standard {state} />
+	{:else if state.type === 'obstacle'}
+		<Obstacle />
+	{:else if state.type === 'goal'}
+		<Goal {value} />
+	{/if}
+</div>
 
 <style>
 	.canvas {
-		background-color: aqua;
+		border-radius: 0px;
+		background: #02006c;
+		aspect-ratio: 1 / 1;
 	}
 </style>

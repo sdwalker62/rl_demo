@@ -5,7 +5,9 @@
 
 <div class="canvas">
 	<NavBar />
-	<Environment />
+	<div class="board">
+		<Environment />
+	</div>
 </div>
 
 <style>
@@ -15,5 +17,14 @@
 		height: 100%;
 		margin: 0;
 		padding: 0;
+	}
+	.board {
+		width: 80vw;
+		height: 90vh;
+		max-height: 70vh;
+		max-width: 80vw;
+		margin-left: 1em;
+		display: flex;
+		flex-direction: row;
 	}
 </style>

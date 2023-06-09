@@ -45,6 +45,7 @@ export class PolicyIteration {
 		for (const terminal_state of terminal_states) {
 			this.state_values[terminal_state] = 0;
 		}
+		this.history = [];
 	}
 
 	/**
@@ -133,6 +134,11 @@ export class PolicyIteration {
 					policy_stable = false;
 				}
 			}
+			const history_frame = {
+				state_values: this.state_values,
+				policy: this.policy
+			};
+			this.history.push(history_frame);
 			if (!policy_stable) {
 				this.policy_evaluation(max_iterations);
 			} else {

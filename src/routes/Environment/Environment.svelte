@@ -3,9 +3,30 @@
 	import { PolicyIteration } from '../../algorithms/policy_iteration';
 	import Tile from './Tiles/Tile.svelte';
 
-	let n_cols = 4;
-	let n_rows = 3;
-	let grid_world = Array.from(Array(n_rows), (_) => Array(n_cols).fill(0));
+	let n_cols = 5;
+	let n_rows = 5;
+	let state = {
+		type: 'standard',
+		policy_action: 'left',
+		value: 1000
+	};
+	let grid_world = Array.from(Array(n_rows), (_) => Array(n_cols).fill(state));
+
+	grid_world[3][4] = {
+		type: 'obstacle'
+	};
+
+	grid_world[2][2] = {
+		type: 'obstacle'
+	};
+	grid_world[1][2] = {
+		type: 'obstacle'
+	};
+
+	grid_world[4][4] = {
+		type: 'goal',
+		value: -100
+	};
 
 	let larger_axis;
 	if (n_cols > n_rows) {
@@ -97,7 +118,7 @@
 	{#each grid_world as row}
 		<div class="gridworld-row" style="height: {size}%; width: {n_cols * size}%">
 			{#each row as state}
-				<Tile {size} />
+				<Tile {state} />
 			{/each}
 		</div>
 	{/each}
@@ -106,10 +127,12 @@
 <style>
 	.canvas {
 		width: 100%;
-		height: 90vh;
+		height: 100%;
 	}
 	.gridworld-row {
 		display: flex;
 		flex-direction: row;
+		/* margin: 0.01em;
+		gap: 0.01em; */
 	}
 </style>
