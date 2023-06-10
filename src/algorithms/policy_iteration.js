@@ -1,4 +1,3 @@
-import { TransitionMatrix } from './transition_matrix';
 import _ from 'lodash';
 
 /**
@@ -16,8 +15,8 @@ export class PolicyIteration {
 	 * @param {number} initial_value - The state-value functions initial value
 	 * @param {string} initial_action - The policies default action
 	 * @param {Array<number>} terminal_states - Set of states that terminate the environment upon transition
-	 * @param {Array<Object>} goal_states -  A set of states with positive reward
-	 * @param {Array<Object>} penalty_states - A set of states with negative reward
+	 * @param {Object} goal_states -  A set of states with positive reward
+	 * @param {Object} penalty_states - A set of states with negative reward
 	 * @param {number} action_cost - traversal utility cost
 	 */
 	constructor(

@@ -10,3 +10,13 @@ export let max_iterations = writable(0);
 export let replay_history = writable([]);
 export let obstacles = writable([]);
 export let goals = writable([]);
+
+export let grid_world = writable(
+	Array.from(Array(5), () =>
+		Array(5).fill({
+			type: 'standard',
+			policy_action: 'up',
+			value: 0
+		})
+	)
+);

@@ -1,7 +1,37 @@
 <script>
 	import { TransitionMatrix } from '../../algorithms/transition_matrix';
 	import { PolicyIteration } from '../../algorithms/policy_iteration';
-	import { replay_history } from '../../store/shared_data';
+	import {
+		replay_history,
+		grid_world,
+		obstacles,
+		n_cols,
+		n_rows,
+		n_states
+	} from '../../store/shared_data';
+
+	function populate_map(env) {
+		let new_grid_world = Array.from(Array($n_rows), () => Array($n_cols));
+		if (env.length != 0) {
+			for (let state_idx = 0; state_idx < $n_states; state_idx++) {
+				const row_idx = Math.floor(state_idx / $n_cols);
+				const col_idx = state_idx % $n_cols;
+				if ($obstacles.includes(state_idx)) {
+					new_grid_world[row_idx][col_idx] = {
+						type: 'obstacle'
+					};
+				} else {
+					new_grid_world[row_idx][col_idx] = {
+						type: 'standard',
+						policy_action: env[env.length - 1].policy[state_idx],
+						value: env[env.length - 1].state_values[state_idx]
+					};
+				}
+				new_grid_world = new_grid_world;
+			}
+			return new_grid_world;
+		}
+	}
 
 	function run_algorithm() {
 		const up_probs = {
@@ -77,6 +107,7 @@
 
 		strategy.solve(100);
 		replay_history.set(strategy.history);
+		$grid_world = populate_map(strategy.history);
 	}
 </script>
 
