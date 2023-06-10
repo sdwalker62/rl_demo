@@ -45,6 +45,7 @@ export class PolicyIteration {
 			this.state_values[terminal_state] = 0;
 		}
 		this.history = [];
+		this.n_iterations = 0;
 	}
 
 	/**
@@ -53,10 +54,10 @@ export class PolicyIteration {
 	 * @returns the utility of transitioning to this state
 	 */
 	get_reward(state) {
-		if (_.indexOf(Object.keys(this.goal_states), String(state)) != -1) {
-			return 100;
-		} else if (_.indexOf(Object.keys(this.penalty_states), String(state)) != -1) {
-			return -100;
+		if (state in this.goal_states) {
+			return this.goal_states[state];
+		} else if (state in this.penalty_states) {
+			return this.penalty_states[state];
 		} else {
 			return this.action_cost;
 		}
@@ -141,6 +142,7 @@ export class PolicyIteration {
 			if (!policy_stable) {
 				this.policy_evaluation(max_iterations);
 			} else {
+				this.n_iterations = iterations;
 				break;
 			}
 		}

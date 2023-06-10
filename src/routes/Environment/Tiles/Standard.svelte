@@ -1,25 +1,38 @@
 <script>
+	import { min_value, max_value } from '../../../store/shared_data';
 	export let state;
-
 	const value = state.value;
+
+	const value_range = $max_value - $min_value;
+	const color_ratio = value / value_range;
+
+	/**
+	 * @param {number} value - between 0 and 1
+	 */
+	function getColor(value) {
+		var hue = (value * 200).toString(10);
+		return ['hsl(', hue, ', 100%, 40%)'].join('');
+	}
+	const color = getColor(color_ratio);
+
 	const policy_action = state.policy_action;
 </script>
 
 <div class="canvas" style="width: {100}%; height: {100}%">
-	<div class="standard">
+	<div class="standard" style="background-color: {color};">
 		<div class="info">
 			<p class="icon">
 				{#if policy_action === 'up'}
-					<i id="arrow" class="fa-solid fa-arrow-up fa-3x" style="color: #ebebeb;" />
+					<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
 				{:else if policy_action === 'right'}
-					<i id="arrow" class="fa-solid fa-arrow-right fa-3x" style="color: #ebebeb;" />
+					<i id="arrow" class="fa-solid fa-arrow-right" style="color: #ebebeb;" />
 				{:else if policy_action === 'down'}
-					<i id="arrow" class="fa-solid fa-arrow-down fa-3x" style="color: #ebebeb;" />
+					<i id="arrow" class="fa-solid fa-arrow-down" style="color: #ebebeb;" />
 				{:else if policy_action === 'left'}
-					<i id="arrow" class="fa-solid fa-arrow-left fa-3x" style="color: #ebebeb;" />
+					<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
 				{/if}
 			</p>
-			<span class="value">{value}</span>
+			<span class="value">{value.toFixed(2)}</span>
 		</div>
 	</div>
 </div>
@@ -58,11 +71,12 @@
 
 	#arrow {
 		flex-grow: 1;
+		font-size: 1em;
 	}
 
 	.value {
 		flex-grow: 2;
-		font-size: xx-large;
+		font-size: 1em;
 		font-family: 'SF Pro';
 		color: white;
 	}

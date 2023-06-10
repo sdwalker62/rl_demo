@@ -2,8 +2,8 @@
 	import Tile from './Tiles/Tile.svelte';
 	import { n_cols, n_rows, grid_world } from '../../store/shared_data';
 
-	$n_cols = 5;
-	$n_rows = 5;
+	$n_cols = 10;
+	$n_rows = 10;
 
 	let larger_axis;
 	if (n_cols > n_rows) {
