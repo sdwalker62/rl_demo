@@ -11,7 +11,7 @@
 			12: 0
 		},
 		goal_states: {
-			24: 100,
+			24: 400,
 			8: 100
 		},
 		initial_action: 0,

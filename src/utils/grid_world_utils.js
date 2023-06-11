@@ -31,7 +31,7 @@ export function populate_map(environment, history) {
  * @param {Object} environment - Gridworld information
  * @param {Object} history - history from the policy run
  */
-export function render_board(grid_world, environment, history) {
+export async function render_board(environment, history) {
 	const nc = environment.n_cols;
 	const nr = environment.n_rows;
 	const n_states = nr * nc;
@@ -41,19 +41,19 @@ export function render_board(grid_world, environment, history) {
 			const row_idx = Math.floor(state_idx / nc);
 			const col_idx = state_idx % nc;
 			if (environment.obstacles.includes(state_idx)) {
-				grid_world[row_idx][col_idx] = {
+				new_grid_world[row_idx][col_idx] = {
 					type: 'obstacle'
 				};
 			} else if (Object.keys(environment.goal_states).includes(String(state_idx))) {
-				grid_world[row_idx][col_idx] = {
+				new_grid_world[row_idx][col_idx] = {
 					type: 'goal'
 				};
 			} else if (Number(history.player_state) === state_idx) {
-				grid_world[row_idx][col_idx] = {
+				new_grid_world[row_idx][col_idx] = {
 					type: 'player'
 				};
 			} else {
-				grid_world[row_idx][col_idx] = {
+				new_grid_world[row_idx][col_idx] = {
 					type: 'standard',
 					policy_action: 'up',
 					value: history.values[state_idx]
