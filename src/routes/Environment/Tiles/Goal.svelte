@@ -1,5 +1,4 @@
 <script>
-	export let value;
 </script>
 
 <div class="canvas" style="width: {100}%; height: {100}%">

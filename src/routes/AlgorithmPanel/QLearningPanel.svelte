@@ -18,8 +18,6 @@
 	function max_Q(Q) {
 		let max_Q_value = -100000;
 		for (const action in Object.keys(Q)) {
-			console.log(action);
-			console.log(Q[action]);
 			if (Q[action] > max_Q_value) {
 				max_Q_value = Q[action];
 			}
@@ -30,7 +28,7 @@
 	function get_state_values(state_action_values) {
 		let state_values = [];
 		let num_states = Object.keys(state_action_values).length;
-		for (let state_idx = 0; state_idx < num_states - 1; state_idx++) {
+		for (let state_idx = 0; state_idx < num_states; state_idx++) {
 			state_values.push(max_Q(state_action_values[state_idx]));
 		}
 		return state_values;
@@ -39,7 +37,6 @@
 	async function replay(history, num_iterations) {
 		// for (let i = 0; i < num_iterations - 1; i++) {
 		const i = history.length - 1;
-		console.log(i);
 		let state_values = get_state_values(history[i].Q);
 		const history_with_state_values = {
 			player_state: history[i].state,
@@ -54,10 +51,9 @@
 		let strategy = new QLearning($environment, $mechanics, $q_learning);
 		let history;
 		let num_episodes;
-		for (num_episodes = 0; num_episodes < 10000; num_episodes++) {
+		for (num_episodes = 0; num_episodes < 100; num_episodes++) {
 			history = strategy.run_episode(max_steps);
 		}
-		console.log(history);
 		replay(history, num_episodes);
 	}
 </script>

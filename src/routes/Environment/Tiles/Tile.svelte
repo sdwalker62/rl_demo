@@ -5,8 +5,6 @@
 	import Standard from './Standard.svelte';
 
 	export let state;
-
-	let value = state.value;
 </script>
 
 <div class="canvas" style="width: {100}%; height: {100}%">
@@ -17,7 +15,7 @@
 	{:else if state.type === 'obstacle'}
 		<Obstacle />
 	{:else if state.type === 'goal'}
-		<Goal {value} />
+		<Goal />
 	{/if}
 </div>
 

@@ -36,7 +36,7 @@
 					<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
 				{/if}
 			</p>
-			<span class="value">{value}</span>
+			<span class="value">{value.toFixed(2)}</span>
 		</div>
 	</div>
 </div>

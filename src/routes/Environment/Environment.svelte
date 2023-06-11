@@ -8,7 +8,7 @@
 		action_cost: -1,
 		obstacles: [2, 7, 14],
 		penalty_states: {
-			12: -10
+			12: 0
 		},
 		goal_states: {
 			24: 100,
