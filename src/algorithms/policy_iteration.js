@@ -103,7 +103,7 @@ export class PolicyIteration {
 						max_action_value = action_value;
 					}
 				}
-				this.policy[state_idx] = best_action;
+				this.policy[state_idx] = Number(best_action);
 				if (best_action != old_action) {
 					policy_stable = false;
 				}

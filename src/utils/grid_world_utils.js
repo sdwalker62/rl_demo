@@ -55,7 +55,7 @@ export function render_board(environment, history) {
 			} else {
 				new_grid_world[row_idx][col_idx] = {
 					type: 'standard',
-					policy_action: 'up',
+					policy_action: history.actions[state_idx],
 					value: history.values[state_idx]
 				};
 			}

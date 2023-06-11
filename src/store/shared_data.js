@@ -8,7 +8,7 @@ export let grid_world = writable(
 	Array.from(Array(5), () =>
 		Array(5).fill({
 			type: 'standard',
-			policy_action: 'up',
+			policy_action: 0,
 			value: 0
 		})
 	)

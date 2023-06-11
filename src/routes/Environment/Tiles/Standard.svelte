@@ -26,13 +26,13 @@
 	<div class="standard" style="background-color: {color};">
 		<div class="info">
 			<p class="icon">
-				{#if policy_action === 'up'}
+				{#if policy_action === 0}
 					<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
-				{:else if policy_action === 'right'}
+				{:else if policy_action === 1}
 					<i id="arrow" class="fa-solid fa-arrow-right" style="color: #ebebeb;" />
-				{:else if policy_action === 'down'}
+				{:else if policy_action === 2}
 					<i id="arrow" class="fa-solid fa-arrow-down" style="color: #ebebeb;" />
-				{:else if policy_action === 'left'}
+				{:else if policy_action === 3}
 					<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
 				{/if}
 			</p>

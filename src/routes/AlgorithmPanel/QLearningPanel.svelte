@@ -27,12 +27,17 @@
 	 */
 	function max_Q(Q) {
 		let max_Q_value = -100_000;
+		let best_action = 0;
 		for (const action in Object.keys(Q)) {
 			if (Q[action] > max_Q_value) {
 				max_Q_value = Q[action];
+				best_action = Number(action);
 			}
 		}
-		return max_Q_value;
+		return {
+			state_value: max_Q_value,
+			best_action: best_action
+		};
 	}
 
 	/**
@@ -42,11 +47,14 @@
 	 */
 	function get_state_values(state_action_values) {
 		let state_values = [];
+		let best_actions = [];
 		let num_states = Object.keys(state_action_values).length;
 		for (let state_idx = 0; state_idx < num_states; state_idx++) {
-			state_values.push(max_Q(state_action_values[state_idx]));
+			const best_Q = max_Q(state_action_values[state_idx]);
+			state_values.push(best_Q.state_value);
+			best_actions.push(best_Q.best_action);
 		}
-		return state_values;
+		return { state_values: state_values, best_actions: best_actions };
 	}
 
 	/**
@@ -57,11 +65,12 @@
 	function replay(history) {
 		const n_states = $environment.n_cols * $environment.n_rows;
 		for (let i = 0; i < history.length - 1; i++) {
-			let state_values = get_state_values(history[i].Q);
+			let state_information = get_state_values(history[i].Q);
 			for (let state_idx = 0; state_idx < n_states; state_idx++) {
 				$grid_world = render_board($environment, {
 					player_state: history[i].state,
-					values: state_values
+					values: state_information.state_values,
+					actions: state_information.best_actions
 				});
 			}
 		}

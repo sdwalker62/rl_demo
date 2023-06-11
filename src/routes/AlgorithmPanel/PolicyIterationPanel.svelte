@@ -16,6 +16,7 @@
 
 		strategy.solve(100);
 		replay_history.set(strategy.history);
+		console.log(strategy.history);
 		$grid_world = populate_map($environment, strategy.history);
 		$number_iterations = strategy.n_iterations;
 	}
