@@ -7,41 +7,32 @@ import _ from 'lodash';
  */
 export class PolicyIteration {
 	/**
+	 * @param {Object} environment - JSON containing information from the env
+	 * 	contains information such as:
+	 * 		- number of states
+	 * 		- goal states
+	 * 		- initial states
+	 * 		etc.
 	 *
-	 * @param {number} n_states - Total number of system states
-	 * @param {Object} mechanics - The transition mechanics for this environment
-	 * @param {number} gamma - Learning rate
-	 * @param {number} theta - The convergence threshold
-	 * @param {number} initial_value - The state-value functions initial value
-	 * @param {string} initial_action - The policies default action
-	 * @param {Array<number>} terminal_states - Set of states that terminate the environment upon transition
-	 * @param {Object} goal_states -  A set of states with positive reward
-	 * @param {Object} penalty_states - A set of states with negative reward
-	 * @param {number} action_cost - traversal utility cost
+	 * @param {Object} mechanics - JSON containing action transition probability matrices
+	 * @param {Object} algorithm_paramaters - policy iteration specific hyper-parameters
 	 */
-	constructor(
-		n_states,
-		mechanics,
-		gamma,
-		theta,
-		initial_value,
-		initial_action,
-		terminal_states,
-		goal_states,
-		penalty_states,
-		action_cost
-	) {
+	constructor(environment, mechanics, algorithm_paramaters) {
+		console.log(environment);
+		console.log(mechanics);
+		console.log(algorithm_paramaters);
+
 		this.mechanics = mechanics;
-		this.gamma = gamma;
-		this.theta = theta;
-		this.n_states = n_states;
-		this.goal_states = goal_states;
-		this.penalty_states = penalty_states;
-		this.state_values = Array(n_states).fill(initial_value);
-		this.policy = Array(n_states).fill(initial_action);
-		this.action_cost = action_cost;
-		this.initial_action = initial_action;
-		for (const terminal_state of terminal_states) {
+		this.gamma = algorithm_paramaters.gamma;
+		this.theta = algorithm_paramaters.theta;
+		this.n_states = environment.n_rows * environment.n_cols;
+		this.goal_states = environment.goal_tiles;
+		this.penalty_states = environment.penalty_tiles;
+		this.state_values = Array(this.n_states).fill(environment.initial_value);
+		this.policy = Array(this.n_states).fill(environment.initial_action);
+		this.action_cost = environment.action_cost;
+		this.initial_action = environment.initial_action;
+		for (const terminal_state of environment.terminal_states) {
 			this.state_values[terminal_state] = 0;
 		}
 		this.history = [];

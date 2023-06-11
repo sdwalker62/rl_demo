@@ -1,16 +1,8 @@
 import { writable, derived } from 'svelte/store';
+import { TransitionMatrix } from '../algorithms/transition_matrix';
 
 export let colorMode = writable('dark');
-export let n_cols = writable(0);
-export let n_rows = writable(0);
-export let n_states = derived([n_cols, n_rows], ([$n_cols, $n_rows]) => {
-	return $n_cols * $n_rows;
-});
-export let max_iterations = writable(0);
 export let replay_history = writable([]);
-export let obstacles = writable([]);
-export let goal_tiles = writable({});
-export let penalty_tiles = writable({});
 
 export let grid_world = writable(
 	Array.from(Array(5), () =>
@@ -24,7 +16,113 @@ export let grid_world = writable(
 
 export let max_value = writable(100);
 export let min_value = writable(-100);
-export let n_iterations = writable(0);
-export let gamma = writable(0.9);
-export let theta = writable(0.001);
-export let action_cost = writable(-1);
+export let number_iterations = writable(0);
+
+export let environment = writable({
+	n_cols: 5,
+	n_rows: 5,
+	action_cost: -1,
+	obstacles: [],
+	penalty_tiles: {},
+	goal_tiles: {},
+	initial_action: 'up',
+	initial_value: 0,
+	terminal_states: []
+});
+
+// Algorithm Specific Parameters
+
+export let policy_iteration = writable({
+	gamma: 0.9,
+	theta: 0.001,
+	max_iterations: 100
+});
+
+// Transition Mechanics (there needs to be a way to add this dynamically)
+// ======================================================================
+export let up_probs = writable({
+	up: 0.8,
+	right: 0.1,
+	down: 0,
+	left: 0.1
+});
+export let right_probs = writable({
+	up: 0.1,
+	right: 0.8,
+	down: 0.1,
+	left: 0
+});
+export let down_probs = writable({
+	up: 0,
+	right: 0.1,
+	down: 0.8,
+	left: 0.1
+});
+export let left_probs = writable({
+	up: 0.1,
+	right: 0,
+	down: 0.1,
+	left: 0.8
+});
+
+export let up_transition_matrix = derived([up_probs, environment], ([$up_probs, $environment]) => {
+	return new TransitionMatrix(
+		$environment.n_rows,
+		$environment.n_cols,
+		$up_probs,
+		$environment.obstacles
+	);
+});
+
+export let right_transition_matrix = derived(
+	[right_probs, environment],
+	([$right_probs, $environment]) => {
+		return new TransitionMatrix(
+			$environment.n_rows,
+			$environment.n_cols,
+			$right_probs,
+			$environment.obstacles
+		);
+	}
+);
+
+export let down_transition_matrix = derived(
+	[down_probs, environment],
+	([$down_probs, $environment]) => {
+		return new TransitionMatrix(
+			$environment.n_rows,
+			$environment.n_cols,
+			$down_probs,
+			$environment.obstacles
+		);
+	}
+);
+
+export let left_transition_matrix = derived(
+	[left_probs, environment],
+	([$left_probs, $environment]) => {
+		return new TransitionMatrix(
+			$environment.n_rows,
+			$environment.n_cols,
+			$left_probs,
+			$environment.obstacles
+		);
+	}
+);
+
+export let mechanics = derived(
+	[up_transition_matrix, right_transition_matrix, down_transition_matrix, left_transition_matrix],
+	([
+		$up_transition_matrix,
+		$right_transition_matrix,
+		$down_transition_matrix,
+		$left_transition_matrix
+	]) => {
+		return {
+			up: $up_transition_matrix,
+			right: $right_transition_matrix,
+			down: $down_transition_matrix,
+			left: $left_transition_matrix
+		};
+	}
+);
