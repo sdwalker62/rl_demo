@@ -3,8 +3,8 @@
 	import { grid_world, environment } from '../../store/shared_data';
 
 	$environment = {
-		n_cols: 10,
-		n_rows: 10,
+		n_cols: 5,
+		n_rows: 5,
 		action_cost: -1,
 		obstacles: [2, 7, 14],
 		penalty_states: {
@@ -12,13 +12,12 @@
 		},
 		goal_states: {
 			24: 100,
-			8: 100,
-			68: 100
+			8: 100
 		},
-		initial_action: 'up',
+		initial_action: 0,
 		initial_value: 0,
 		initial_state: 0,
-		terminal_states: [24, 8, 68]
+		terminal_states: [24, 8]
 	};
 
 	let larger_axis;

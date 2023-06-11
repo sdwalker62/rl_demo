@@ -43,10 +43,10 @@ export class QLearning {
 
 		for (let i = 0; i < this.n_states; i++) {
 			this.state_action_values[i] = {
-				up: 0,
-				right: 0,
-				down: 0,
-				left: 0
+				0: 0,
+				1: 0,
+				2: 0,
+				3: 0
 			};
 		}
 	}
@@ -82,39 +82,39 @@ export class QLearning {
 		return this.random_choice(probability_array);
 	}
 
-	convert_action_from_numeric_to_string(action) {
-		switch (action) {
-			case '0':
-				action = 'up';
-				break;
-			case '1':
-				action = 'right';
-				break;
-			case '2':
-				action = 'down';
-				break;
-			case '3':
-				action = 'left';
-				break;
-		}
-		return action;
-	}
+	// convert_action_from_numeric_to_string(action) {
+	// 	switch (action) {
+	// 		case '0':
+	// 			action = 'up';
+	// 			break;
+	// 		case '1':
+	// 			action = 'right';
+	// 			break;
+	// 		case '2':
+	// 			action = 'down';
+	// 			break;
+	// 		case '3':
+	// 			action = 'left';
+	// 			break;
+	// 	}
+	// 	return action;
+	// }
 
 	get_next_action(state) {
 		// Check for random exploration
 		const randomly_explore_probabilities = [1 - this.epsilon, this.epsilon];
 		const randomly_explore = this.random_choice(randomly_explore_probabilities);
 		if (randomly_explore === '1') {
-			return this.convert_action_from_numeric_to_string(this.get_random_action());
+			return this.get_random_action();
 		} else {
 			const current_state_action_values = this.state_action_values[state];
 			let max_state_action_value = 0;
-			let best_action = 'up';
-			for (const action_idx in Object.keys(current_state_action_values)) {
-				let action = this.convert_action_from_numeric_to_string(action_idx);
-				if (current_state_action_values[action] >= max_state_action_value) {
-					best_action = action;
-					max_state_action_value = current_state_action_values[action];
+			let best_action = 0;
+			for (const action in Object.keys(current_state_action_values)) {
+				let num_action = Number(action);
+				if (current_state_action_values[num_action] >= max_state_action_value) {
+					best_action = num_action;
+					max_state_action_value = current_state_action_values[num_action];
 				}
 			}
 			return best_action;

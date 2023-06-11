@@ -26,7 +26,7 @@ export let environment = writable({
 	obstacles: [],
 	penalty_states: {},
 	goal_states: {},
-	initial_action: 'up',
+	initial_action: 0,
 	initial_value: 0,
 	terminal_states: [],
 	initial_state: 0
@@ -132,10 +132,10 @@ export let mechanics = derived(
 		$left_transition_matrix
 	]) => {
 		return {
-			up: $up_transition_matrix,
-			right: $right_transition_matrix,
-			down: $down_transition_matrix,
-			left: $left_transition_matrix
+			0: $up_transition_matrix,
+			1: $right_transition_matrix,
+			2: $down_transition_matrix,
+			3: $left_transition_matrix
 		};
 	}
 );

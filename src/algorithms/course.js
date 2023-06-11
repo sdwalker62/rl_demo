@@ -37,7 +37,7 @@ export class Course {
 		const next_state = this.random_choice(transition_mechanics);
 		const reward = this.get_reward(Number(next_state));
 		return {
-			next_state: next_state,
+			next_state: Number(next_state),
 			reward: reward
 		};
 	}

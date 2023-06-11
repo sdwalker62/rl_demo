@@ -13,8 +13,12 @@
 		var hue = (value * 200).toString(10);
 		return ['hsl(', hue, ', 100%, 40%)'].join('');
 	}
-	const color = getColor(color_ratio);
-
+	let color;
+	if (value === 0) {
+		color = '#0C0C0C';
+	} else {
+		color = getColor(color_ratio);
+	}
 	const policy_action = state.policy_action;
 </script>
 

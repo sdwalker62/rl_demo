@@ -36,7 +36,6 @@ export function render_board(environment, history) {
 	const nr = environment.n_rows;
 	const n_states = nr * nc;
 	let new_grid_world = Array.from(Array(nr), () => Array(nc));
-	console.log(history.values[0]);
 	if (history.length != 0) {
 		for (let state_idx = 0; state_idx < n_states; state_idx++) {
 			const row_idx = Math.floor(state_idx / nc);

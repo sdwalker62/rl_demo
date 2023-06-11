@@ -59,22 +59,9 @@ export class PolicyIteration {
 			let delta = 0;
 			for (let state_idx = 0; state_idx < this.n_states; state_idx++) {
 				if (_.indexOf(Object.keys(this.goal_states), String(state_idx)) === -1) {
-					let temp_v = this.state_values[state_idx];
-					let probability_matrix;
-					switch (this.policy[state_idx]) {
-						case 'up':
-							probability_matrix = this.mechanics.up.matrix;
-							break;
-						case 'right':
-							probability_matrix = this.mechanics.right.matrix;
-							break;
-						case 'down':
-							probability_matrix = this.mechanics.down.matrix;
-							break;
-						case 'left':
-							probability_matrix = this.mechanics.left.matrix;
-							break;
-					}
+					const temp_v = this.state_values[state_idx];
+					const action = this.policy[state_idx];
+					const probability_matrix = this.mechanics[action].matrix;
 					let new_state_value = 0;
 					for (let c_state_idx = 0; c_state_idx < this.n_states; c_state_idx++) {
 						const potential_reward =
