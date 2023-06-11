@@ -18,10 +18,6 @@ export class PolicyIteration {
 	 * @param {Object} algorithm_paramaters - policy iteration specific hyper-parameters
 	 */
 	constructor(environment, mechanics, algorithm_paramaters) {
-		console.log(environment);
-		console.log(mechanics);
-		console.log(algorithm_paramaters);
-
 		this.mechanics = mechanics;
 		this.gamma = algorithm_paramaters.gamma;
 		this.theta = algorithm_paramaters.theta;
