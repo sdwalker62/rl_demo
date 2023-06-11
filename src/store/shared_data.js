@@ -17,20 +17,24 @@ export let grid_world = writable(
 export let max_value = writable(100);
 export let min_value = writable(-100);
 export let number_iterations = writable(0);
+export let lag = writable(10);
 
 export let environment = writable({
 	n_cols: 5,
 	n_rows: 5,
 	action_cost: -1,
 	obstacles: [],
-	penalty_tiles: {},
-	goal_tiles: {},
+	penalty_states: {},
+	goal_states: {},
 	initial_action: 'up',
 	initial_value: 0,
-	terminal_states: []
+	terminal_states: [],
+	initial_state: 0
 });
 
+// ======================================================================
 // Algorithm Specific Parameters
+// ======================================================================
 
 export let policy_iteration = writable({
 	gamma: 0.9,
@@ -38,6 +42,14 @@ export let policy_iteration = writable({
 	max_iterations: 100
 });
 
+export let q_learning = writable({
+	epsilon: 0.05,
+	alpha: 0.1,
+	theta: 0.001,
+	max_iterations: 100
+});
+
+// ======================================================================
 // Transition Mechanics (there needs to be a way to add this dynamically)
 // ======================================================================
 export let up_probs = writable({

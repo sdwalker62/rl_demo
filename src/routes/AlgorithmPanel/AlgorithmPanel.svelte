@@ -1,7 +1,11 @@
 <script>
 	import PolicyIterationPanel from './PolicyIterationPanel.svelte';
+	import QLearningPanel from './QLearningPanel.svelte';
 	let selected_algorithm;
-	let algorithms = [{ id: 'policy_iteration', text: `Policy Iteration` }];
+	let algorithms = [
+		{ id: 'policy_iteration', text: `Policy Iteration` },
+		{ id: 'q_learning', text: 'Q-Learning' }
+	];
 </script>
 
 <div class="canvas">
@@ -14,6 +18,8 @@
 	</select>
 	{#if selected_algorithm === 'policy_iteration'}
 		<PolicyIterationPanel />
+	{:else if selected_algorithm === 'q_learning'}
+		<QLearningPanel />
 	{/if}
 </div>
 

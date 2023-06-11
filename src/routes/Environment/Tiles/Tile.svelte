@@ -1,6 +1,7 @@
 <script>
 	import Goal from './Goal.svelte';
 	import Obstacle from './Obstacle.svelte';
+	import Player from './Player.svelte';
 	import Standard from './Standard.svelte';
 
 	export let state;
@@ -11,6 +12,8 @@
 <div class="canvas" style="width: {100}%; height: {100}%">
 	{#if state.type === 'standard'}
 		<Standard {state} />
+	{:else if state.type === 'player'}
+		<Player {state} />
 	{:else if state.type === 'obstacle'}
 		<Obstacle />
 	{:else if state.type === 'goal'}

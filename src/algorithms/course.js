@@ -1,10 +1,11 @@
 export class Course {
-	constructor(mechanics, rewards, goal_states, epsilon = 0) {
+	constructor(environment, mechanics, hyper_parameters) {
 		this.mechanics = mechanics;
-		this.rewards = rewards;
-		this.epsilon = epsilon;
+		this.epsilon = hyper_parameters.epsilon;
 		this.randomly_explore_probabilities = [1 - this.epsilon, this.epsilon];
-		this.goal_states = goal_states;
+		this.goal_states = environment.goal_states;
+		this.penalty_states = environment.penalty_states;
+		this.action_cost = environment.action_cost;
 	}
 
 	random_choice(probability_array) {
@@ -23,24 +24,51 @@ export class Course {
 		return this.random_choice(probability_array);
 	}
 
-	step(action) {
-		try {
-			const transition_mechanics = this.mechanics[action];
-			const randomly_explore = this.random_choice(this.randomly_explore_probabilities);
-			let next_state;
-			if (randomly_explore) {
-				next_state = this.get_random_action();
-			} else {
-				next_state = this.random_choice(transition_mechanics);
-			}
-			return {
-				next_state: next_state,
-				reward: this.rewards[next_state],
-				done: next_state in this.goal_states
-			};
-		} catch (error) {
-			// this needs to be improved
-			console.log(`Action {action} not a valid action!`);
+	/**
+	 *
+	 * @param {number} state - index of state in the state array
+	 * @returns the utility of transitioning to this state
+	 */
+	get_reward(state) {
+		if (state in this.goal_states) {
+			return this.goal_states[state];
+		} else if (state in this.penalty_states) {
+			return this.penalty_states[state];
+		} else {
+			return this.action_cost;
 		}
+	}
+
+	step(state, action) {
+		const transition_mechanics = this.mechanics[action].matrix[state];
+		const randomly_explore = this.random_choice(this.randomly_explore_probabilities);
+		let next_state;
+		if (randomly_explore === '1') {
+			console.log('Explore!');
+			action = this.get_random_action();
+			let transition_matrix;
+			switch (action) {
+				case '0': // up
+					transition_matrix = this.mechanics['up'].matrix[state];
+					break;
+				case '1': // right
+					transition_matrix = this.mechanics['right'].matrix[state];
+					break;
+				case '2': // down
+					transition_matrix = this.mechanics['down'].matrix[state];
+					break;
+				case '3': // left
+					transition_matrix = this.mechanics['left'].matrix[state];
+					break;
+			}
+			next_state = this.random_choice(transition_matrix);
+		} else {
+			next_state = this.random_choice(transition_mechanics);
+		}
+		return {
+			next_state: next_state,
+			reward: this.get_reward(Number(next_state)),
+			done: next_state in this.goal_states
+		};
 	}
 }

@@ -1,23 +1,31 @@
 <script>
 	import Slider from '@smui/slider';
-	import { PolicyIteration } from '../../algorithms/policy_iteration';
-	import { populate_map } from '../../utils/grid_world_utils';
+	import { QLearning } from '../../algorithms/q_learning';
+	import { populate_map, render_board } from '../../utils/grid_world_utils';
 	import {
 		replay_history,
 		grid_world,
 		environment,
 		mechanics,
 		policy_iteration,
-		number_iterations
+		number_iterations,
+		q_learning,
+		lag
 	} from '../../store/shared_data';
 
-	function run_algorithm() {
-		let strategy = new PolicyIteration($environment, $mechanics, $policy_iteration);
+	const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-		strategy.solve(100);
-		replay_history.set(strategy.history);
-		$grid_world = populate_map($environment, strategy.history);
-		$number_iterations = strategy.n_iterations;
+	async function replay(history, num_iterations) {
+		for (let i = 0; i < num_iterations; i++) {
+			$grid_world = render_board($environment, history, i);
+			await sleep($lag);
+		}
+	}
+	let num_episodes = 1000;
+	function run_algorithm() {
+		let strategy = new QLearning($environment, $mechanics, $q_learning);
+		let history = strategy.run_episode(num_episodes);
+		replay(history, num_episodes);
 	}
 </script>
 
@@ -73,6 +81,12 @@
 		width: 20%;
 		height: 100%;
 		margin: 0 1em;
+	}
+
+	.alg_title {
+		color: white;
+		text-align: center;
+		font-family: 'SF Pro';
 	}
 
 	.start {

@@ -7,16 +7,17 @@
 		n_rows: 10,
 		action_cost: -1,
 		obstacles: [2, 7, 14],
-		penalty_tiles: {
+		penalty_states: {
 			12: -10
 		},
-		goal_tiles: {
+		goal_states: {
 			24: 100,
-			1: 100,
+			8: 100,
 			68: 100
 		},
 		initial_action: 'up',
 		initial_value: 0,
+		initial_state: 0,
 		terminal_states: [24]
 	};
 

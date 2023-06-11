@@ -22,8 +22,8 @@ export class PolicyIteration {
 		this.gamma = algorithm_paramaters.gamma;
 		this.theta = algorithm_paramaters.theta;
 		this.n_states = environment.n_rows * environment.n_cols;
-		this.goal_states = environment.goal_tiles;
-		this.penalty_states = environment.penalty_tiles;
+		this.goal_states = environment.goal_states;
+		this.penalty_states = environment.penalty_states;
 		this.state_values = Array(this.n_states).fill(environment.initial_value);
 		this.policy = Array(this.n_states).fill(environment.initial_action);
 		this.action_cost = environment.action_cost;
