@@ -17,7 +17,7 @@ export let grid_world = writable(
 export let max_value = writable(100);
 export let min_value = writable(-100);
 export let number_iterations = writable(0);
-export let lag = writable(10);
+export let lag = writable(10000);
 
 export let environment = writable({
 	n_cols: 5,

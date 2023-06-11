@@ -16,7 +16,7 @@
 	const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 	function max_Q(Q) {
-		let max_Q_value = -100000;
+		let max_Q_value = -100_000;
 		for (const action in Object.keys(Q)) {
 			if (Q[action] > max_Q_value) {
 				max_Q_value = Q[action];
@@ -26,6 +26,7 @@
 	}
 
 	function get_state_values(state_action_values) {
+		// console.log(state_action_values); CHECKED
 		let state_values = [];
 		let num_states = Object.keys(state_action_values).length;
 		for (let state_idx = 0; state_idx < num_states; state_idx++) {
@@ -34,27 +35,28 @@
 		return state_values;
 	}
 
-	async function replay(history, num_iterations) {
-		// for (let i = 0; i < num_iterations - 1; i++) {
-		const i = history.length - 1;
-		let state_values = get_state_values(history[i].Q);
-		const history_with_state_values = {
-			player_state: history[i].state,
-			values: state_values
-		};
-		$grid_world = render_board($environment, history_with_state_values);
-		await sleep($lag);
-		// }
+	async function replay(history, num_steps) {
+		console.log(history);
+		console.log(num_steps);
+		for (let i = 0; i < num_steps - 1; i++) {
+			let state_values = get_state_values(history[i].Q);
+			const history_with_state_values = {
+				player_state: history[i].state,
+				values: state_values
+			};
+			$grid_world = render_board($environment, history_with_state_values);
+			await sleep(10);
+		}
 	}
-	let max_steps = 100;
+	let max_steps = 500;
 	function run_algorithm() {
 		let strategy = new QLearning($environment, $mechanics, $q_learning);
-		let history;
-		let num_episodes;
-		for (num_episodes = 0; num_episodes < 100; num_episodes++) {
-			history = strategy.run_episode(max_steps);
+		let episode_history = [];
+		for (let num_episodes = 0; num_episodes < 100; num_episodes++) {
+			const history = strategy.run_episode(max_steps);
+			const history_length = history.length;
+			replay(history, history_length);
 		}
-		replay(history, num_episodes);
 	}
 </script>
 

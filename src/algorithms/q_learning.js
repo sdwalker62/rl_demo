@@ -51,21 +51,6 @@ export class QLearning {
 		}
 	}
 
-	// /**
-	//  *
-	//  * @param {number} state - index of state in the state array
-	//  * @returns the utility of transitioning to this state
-	//  */
-	// get_reward(state) {
-	// 	if (state in this.goal_states) {
-	// 		return this.goal_states[state];
-	// 	} else if (state in this.penalty_states) {
-	// 		return this.penalty_states[state];
-	// 	} else {
-	// 		return this.action_cost;
-	// 	}
-	// }
-
 	random_choice(probability_array) {
 		var i,
 			sum = 0,
@@ -81,24 +66,6 @@ export class QLearning {
 		const probability_array = new Array(num_actions).fill(1 / num_actions);
 		return this.random_choice(probability_array);
 	}
-
-	// convert_action_from_numeric_to_string(action) {
-	// 	switch (action) {
-	// 		case '0':
-	// 			action = 'up';
-	// 			break;
-	// 		case '1':
-	// 			action = 'right';
-	// 			break;
-	// 		case '2':
-	// 			action = 'down';
-	// 			break;
-	// 		case '3':
-	// 			action = 'left';
-	// 			break;
-	// 	}
-	// 	return action;
-	// }
 
 	get_next_action(state) {
 		// Check for random exploration
@@ -130,19 +97,19 @@ export class QLearning {
 		for (let step_n = 0; step_n < max_steps; step_n++) {
 			history.push({
 				state: state,
-				Q: Object.assign({}, this.state_action_values)
+				Q: JSON.parse(JSON.stringify(this.state_action_values))
 			});
 			const step_information = this.course.step(state, action);
 			reward = step_information.reward;
 			next_state = step_information.next_state;
-			if (next_state in this.goal_states) {
-				break;
-			}
 			let next_action = this.get_next_action(next_state);
 			let Q_orig = this.state_action_values[state][action];
 			let Q_prime = this.state_action_values[next_state][next_action];
-			this.state_action_values[state][action] =
-				Q_orig + this.alpha * (reward + this.gamma * Q_prime - Q_orig);
+			const new_state_value = Q_orig + this.alpha * (reward + this.gamma * Q_prime - Q_orig);
+			this.state_action_values[state][action] = new_state_value;
+			if (next_state in this.goal_states) {
+				break;
+			}
 			state = next_state;
 			action = next_action;
 		}
