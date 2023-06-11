@@ -2,15 +2,7 @@
 	import Slider from '@smui/slider';
 	import { QLearning } from '../../algorithms/q_learning';
 	import { render_board } from '../../utils/grid_world_utils';
-	import {
-		grid_world,
-		environment,
-		mechanics,
-		policy_iteration,
-		number_iterations,
-		q_learning,
-		lag
-	} from '../../store/shared_data';
+	import { grid_world, environment, mechanics, q_learning, lag } from '../../store/shared_data';
 
 	/**
 	 * Sleep function needed for the episode renderer
@@ -94,10 +86,6 @@
 
 <div class="canvas">
 	<div>
-		<h1 id="iters">Iterations</h1>
-		<h1 class="num-iterations">{$number_iterations}</h1>
-	</div>
-	<div>
 		<label id="n-rows-label" for="rows">Number of rows</label>
 		<input id="n-rows" bind:value={$environment.n_rows} />
 	</div>
@@ -107,27 +95,53 @@
 	</div>
 	<div>
 		<Slider
-			bind:value={$policy_iteration.gamma}
+			bind:value={$q_learning.epsilon}
 			min={0}
 			max={1}
 			step={0.001}
 			input$aria-label="Continuous slider"
 		/>
-		<pre class="status">Gamma: {$policy_iteration.gamma}</pre>
+		<pre class="status">&epsilon;: {$q_learning.epsilon}</pre>
 	</div>
 	<div>
 		<Slider
-			bind:value={$environment.action_cost}
-			min={-10}
-			max={10}
-			step={0.1}
+			bind:value={$q_learning.gamma}
+			min={0}
+			max={1}
+			step={0.001}
 			input$aria-label="Continuous slider"
 		/>
-		<pre class="status">Action Cost: {$environment.action_cost}</pre>
+		<pre class="status">&gamma;: {$q_learning.gamma}</pre>
 	</div>
 	<div>
-		<label id="theta-label" for="theta">Theta</label>
-		<input id="theta" bind:value={$policy_iteration.theta} />
+		<Slider
+			bind:value={$q_learning.alpha}
+			min={0}
+			max={1}
+			step={0.001}
+			input$aria-label="Continuous slider"
+		/>
+		<pre class="status">&alpha;: {$q_learning.alpha}</pre>
+	</div>
+	<div>
+		<label id="theta-label" for="theta">Max Steps Per Episode</label>
+		<input id="theta" bind:value={$q_learning.max_steps_per_episode} />
+	</div>
+	<div>
+		<label id="theta-label" for="theta">Number of Episode</label>
+		<input id="theta" bind:value={$q_learning.num_episodes} />
+	</div>
+	<div>
+		<label id="theta-label" for="theta">Action Cost</label>
+		<input id="theta" bind:value={$environment.action_cost} />
+	</div>
+	<div>
+		<Slider bind:value={$lag} min={0} max={100} step={10} input$aria-label="Continuous slider" />
+		<pre class="status">Render Speed (ms): {$lag}</pre>
+	</div>
+	<div>
+		<label id="theta-label" for="theta">Number of Episodes Between Renders</label>
+		<input id="theta" bind:value={$q_learning.render_idx_step} />
 	</div>
 	<div>
 		<button class="start" on:click={run_algorithm}> Start </button>

@@ -1,6 +1,6 @@
 <script>
 	import Tile from './Tiles/Tile.svelte';
-	import { grid_world, environment } from '../../store/shared_data';
+	import { grid_world, environment, current_frame, replay_history } from '../../store/shared_data';
 
 	$environment = {
 		n_cols: 5,
@@ -29,25 +29,48 @@
 	const size = 100 / larger_axis;
 </script>
 
-{#key $grid_world}
-	<div class="canvas">
-		{#each $grid_world as row}
-			<div class="gridworld-row" style="height: {size}%; width: {$environment.n_cols * size}%">
-				{#each row as state}
-					<Tile {state} />
-				{/each}
-			</div>
-		{/each}
+<div class="grid_world_container">
+	{#key $grid_world}
+		<div class="canvas">
+			{#each $grid_world as row}
+				<div class="gridworld-row" style="height: {size}%; width: {$environment.n_cols * size}%">
+					{#each row as state}
+						<Tile {state} />
+					{/each}
+				</div>
+			{/each}
+		</div>
+	{/key}
+
+	<div id="replay_slider">
+		<input
+			type="range"
+			min="1"
+			max={String($replay_history.length - 1)}
+			bind:value={$current_frame}
+			class="slider"
+			id="myRange"
+		/>
 	</div>
-{/key}
+</div>
 
 <style>
 	.canvas {
-		width: 80%;
+		width: 100%;
 		height: 100%;
 	}
 	.gridworld-row {
 		display: flex;
 		flex-direction: row;
+	}
+
+	.grid_world_container {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.slider {
+		width: 80vw;
 	}
 </style>

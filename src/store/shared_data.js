@@ -3,6 +3,7 @@ import { TransitionMatrix } from '../algorithms/transition_matrix';
 
 export let colorMode = writable('dark');
 export let replay_history = writable([]);
+export let current_frame = writable(0);
 
 export let grid_world = writable(
 	Array.from(Array(5), () =>
@@ -17,7 +18,7 @@ export let grid_world = writable(
 export let max_value = writable(100);
 export let min_value = writable(-100);
 export let number_iterations = writable(0);
-export let lag = writable(1000);
+export let lag = writable(100);
 
 export let environment = writable({
 	n_cols: 5,
@@ -47,8 +48,8 @@ export let q_learning = writable({
 	gamma: 0.9,
 	alpha: 0.1,
 	theta: 0.001,
-	max_steps_per_episode: 10,
-	num_episodes: 10,
+	max_steps_per_episode: 1000,
+	num_episodes: 1000,
 	render_idx_step: 20
 });
 

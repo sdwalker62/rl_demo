@@ -22,7 +22,7 @@
 <style>
 	.canvas {
 		border-radius: 0px;
-		background: #02006c;
+		background: #1f1f1f;
 		aspect-ratio: 1 / 1;
 	}
 </style>

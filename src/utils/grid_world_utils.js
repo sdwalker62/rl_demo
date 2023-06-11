@@ -2,9 +2,9 @@
  * @param {Object} environment - Gridworld information
  * @param {Object} history - history from the policy run
  */
-export function populate_map(environment, history) {
-	const nc = environment.n_cols;
-	const nr = environment.n_rows;
+export function populate_map(environment, history, frame_idx) {
+	const nc = Number(environment.n_cols);
+	const nr = Number(environment.n_rows);
 	const n_states = nr * nc;
 	let new_grid_world = Array.from(Array(nr), () => Array(nc));
 	if (history.length != 0) {
@@ -15,11 +15,15 @@ export function populate_map(environment, history) {
 				new_grid_world[row_idx][col_idx] = {
 					type: 'obstacle'
 				};
+			} else if (Object.keys(environment.goal_states).includes(String(state_idx))) {
+				new_grid_world[row_idx][col_idx] = {
+					type: 'goal'
+				};
 			} else {
 				new_grid_world[row_idx][col_idx] = {
 					type: 'standard',
-					policy_action: history[history.length - 1].policy[state_idx],
-					value: history[history.length - 1].state_values[state_idx]
+					policy_action: history[frame_idx].policy[state_idx],
+					value: history[frame_idx].state_values[state_idx]
 				};
 			}
 		}
@@ -32,8 +36,8 @@ export function populate_map(environment, history) {
  * @param {Object} history - history from the policy run
  */
 export function render_board(environment, history) {
-	const nc = environment.n_cols;
-	const nr = environment.n_rows;
+	const nc = Number(environment.n_cols);
+	const nr = Number(environment.n_rows);
 	const n_states = nr * nc;
 	let new_grid_world = Array.from(Array(nr), () => Array(nc));
 	if (history.length != 0) {

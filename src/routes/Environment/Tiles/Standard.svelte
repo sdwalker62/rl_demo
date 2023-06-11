@@ -44,14 +44,14 @@
 <style>
 	.canvas {
 		display: flex;
-		background: #0c0c0c;
+		background: #1f1f1f;
 		aspect-ratio: 1 / 1;
 		align-items: center;
 		justify-content: center;
 	}
 
 	.standard {
-		background: #02006c;
+		background: #1f1f1f;
 		aspect-ratio: 1 / 1;
 		width: 99.5%;
 		height: 99.5%;

@@ -8,16 +8,20 @@
 		environment,
 		mechanics,
 		policy_iteration,
-		number_iterations
+		number_iterations,
+		current_frame
 	} from '../../store/shared_data';
+
+	$: if ($replay_history.length != 0) {
+		$grid_world = populate_map($environment, $replay_history, $current_frame);
+	}
 
 	function run_algorithm() {
 		let strategy = new PolicyIteration($environment, $mechanics, $policy_iteration);
-
 		strategy.solve(100);
 		replay_history.set(strategy.history);
-		console.log(strategy.history);
-		$grid_world = populate_map($environment, strategy.history);
+		$current_frame = strategy.history.length - 1;
+		// $grid_world = populate_map($environment, strategy.history, frame_idx);
 		$number_iterations = strategy.n_iterations;
 	}
 </script>
