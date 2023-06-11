@@ -1,23 +1,13 @@
 <script>
 	import { min_value, max_value } from '../../../store/shared_data';
 	export let state;
-
-	const policy_action = state.policy_action;
 </script>
 
 <div class="canvas" style="width: {100}%; height: {100}%">
-	<div class="standard" style="background-color: white;">
+	<div class="standard">
 		<div class="info">
 			<p class="icon">
-				{#if policy_action === 'up'}
-					<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
-				{:else if policy_action === 'right'}
-					<i id="arrow" class="fa-solid fa-arrow-right" style="color: #ebebeb;" />
-				{:else if policy_action === 'down'}
-					<i id="arrow" class="fa-solid fa-arrow-down" style="color: #ebebeb;" />
-				{:else if policy_action === 'left'}
-					<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
-				{/if}
+				<i id="player" class="fa-solid fa-robot" />
 			</p>
 		</div>
 	</div>
@@ -26,14 +16,14 @@
 <style>
 	.canvas {
 		display: flex;
-		background: #ffffff;
+		background: #0c0c0c;
 		aspect-ratio: 1 / 1;
 		align-items: center;
 		justify-content: center;
 	}
 
 	.standard {
-		background: #ffffff;
+		background: #0c0c0c;
 		aspect-ratio: 1 / 1;
 		width: 99.5%;
 		height: 99.5%;
@@ -55,9 +45,10 @@
 		text-align: center;
 	}
 
-	#arrow {
+	#player {
+		color: #ffffff;
 		flex-grow: 1;
-		font-size: 1em;
+		font-size: 3em;
 	}
 
 	.value {

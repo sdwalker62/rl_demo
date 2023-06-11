@@ -43,7 +43,8 @@ export let policy_iteration = writable({
 });
 
 export let q_learning = writable({
-	epsilon: 0.05,
+	epsilon: 0.9,
+	gamma: 0.9,
 	alpha: 0.1,
 	theta: 0.001,
 	max_iterations: 100

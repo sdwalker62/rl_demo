@@ -18,7 +18,7 @@
 		initial_action: 'up',
 		initial_value: 0,
 		initial_state: 0,
-		terminal_states: [24]
+		terminal_states: [24, 8, 68]
 	};
 
 	let larger_axis;
