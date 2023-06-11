@@ -31,7 +31,7 @@ export function populate_map(environment, history) {
  * @param {Object} environment - Gridworld information
  * @param {Object} history - history from the policy run
  */
-export async function render_board(environment, history) {
+export function render_board(environment, history) {
 	const nc = environment.n_cols;
 	const nr = environment.n_rows;
 	const n_states = nr * nc;

@@ -34,25 +34,31 @@
 		return state_values;
 	}
 
-	async function replay(history, num_steps) {
+	/**
+	 * Render each episode. This function is async to allow for render lag.
+	 */
+	function replay(history, num_steps) {
+		const n_states = $environment.n_cols * $environment.n_rows;
 		for (let i = 0; i < num_steps - 1; i++) {
 			let state_values = get_state_values(history[i].Q);
-			const history_with_state_values = {
-				player_state: history[i].state,
-				values: state_values
-			};
-			$grid_world = await render_board($environment, history_with_state_values);
-			await sleep(100);
+			for (let state_idx = 0; state_idx < n_states; state_idx++) {
+				$grid_world = render_board($environment, {
+					player_state: history[i].state,
+					values: state_values
+				});
+				// await sleep(10000);
+			}
 		}
 	}
-	let max_steps = 500;
-	function run_algorithm() {
+	let max_steps = 1_000;
+	let num_episodes = 10_000;
+	async function run_algorithm() {
 		let strategy = new QLearning($environment, $mechanics, $q_learning);
-		let episode_history = [];
-		for (let num_episodes = 0; num_episodes < 1000; num_episodes++) {
+		for (let episode_idx = 0; episode_idx < num_episodes; episode_idx++) {
 			const history = strategy.run_episode(max_steps);
 			const history_length = history.length;
-			replay(history, history_length);
+			if (episode_idx % 10 === 0) replay(history, history_length);
+			await sleep(1);
 		}
 	}
 </script>
@@ -109,12 +115,6 @@
 		width: 20%;
 		height: 100%;
 		margin: 0 1em;
-	}
-
-	.alg_title {
-		color: white;
-		text-align: center;
-		font-family: 'SF Pro';
 	}
 
 	.start {
