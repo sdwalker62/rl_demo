@@ -1,9 +1,8 @@
 <script>
 	import Slider from '@smui/slider';
 	import { QLearning } from '../../algorithms/q_learning';
-	import { populate_map, render_board } from '../../utils/grid_world_utils';
+	import { render_board } from '../../utils/grid_world_utils';
 	import {
-		replay_history,
 		grid_world,
 		environment,
 		mechanics,
@@ -13,8 +12,19 @@
 		lag
 	} from '../../store/shared_data';
 
+	/**
+	 * Sleep function needed for the episode renderer
+	 *
+	 * @param {number} ms - the amount of lag (set in shared_data.js)
+	 */
 	const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+	/**
+	 * Calculates the state-value given the Q values.
+	 * V(s) = max_{a} Q(s, a)
+	 *
+	 * @param {Object} Q
+	 */
 	function max_Q(Q) {
 		let max_Q_value = -100_000;
 		for (const action in Object.keys(Q)) {
@@ -25,6 +35,11 @@
 		return max_Q_value;
 	}
 
+	/**
+	 * Gets all of the state values from the Q matrix
+	 *
+	 * @param {Object} state_action_values - the Q values per state
+	 */
 	function get_state_values(state_action_values) {
 		let state_values = [];
 		let num_states = Object.keys(state_action_values).length;
@@ -35,30 +50,35 @@
 	}
 
 	/**
-	 * Render each episode. This function is async to allow for render lag.
+	 * Render each episode.
+	 *
+	 * @param {Array<Object>} history - episode history for rendering
 	 */
-	function replay(history, num_steps) {
+	function replay(history) {
 		const n_states = $environment.n_cols * $environment.n_rows;
-		for (let i = 0; i < num_steps - 1; i++) {
+		for (let i = 0; i < history.length - 1; i++) {
 			let state_values = get_state_values(history[i].Q);
 			for (let state_idx = 0; state_idx < n_states; state_idx++) {
 				$grid_world = render_board($environment, {
 					player_state: history[i].state,
 					values: state_values
 				});
-				// await sleep(10000);
 			}
 		}
 	}
-	let max_steps = 1_000;
-	let num_episodes = 10_000;
+
+	/**
+	 * This function is the main entry point for Q-learning. It is async
+	 * to allow for render lag.
+	 */
 	async function run_algorithm() {
 		let strategy = new QLearning($environment, $mechanics, $q_learning);
-		for (let episode_idx = 0; episode_idx < num_episodes; episode_idx++) {
-			const history = strategy.run_episode(max_steps);
-			const history_length = history.length;
-			if (episode_idx % 10 === 0) replay(history, history_length);
-			await sleep(1);
+		for (let episode_idx = 0; episode_idx < $q_learning.num_episodes; episode_idx++) {
+			const history = strategy.run_episode($q_learning.max_steps_per_episode);
+			if (episode_idx % $q_learning.render_idx_step === 0) {
+				replay(history);
+			}
+			await sleep($lag);
 		}
 	}
 </script>

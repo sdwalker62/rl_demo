@@ -17,7 +17,7 @@ export let grid_world = writable(
 export let max_value = writable(100);
 export let min_value = writable(-100);
 export let number_iterations = writable(0);
-export let lag = writable(10000);
+export let lag = writable(1000);
 
 export let environment = writable({
 	n_cols: 5,
@@ -47,7 +47,9 @@ export let q_learning = writable({
 	gamma: 0.9,
 	alpha: 0.1,
 	theta: 0.001,
-	max_iterations: 100
+	max_steps_per_episode: 10,
+	num_episodes: 10,
+	render_idx_step: 20
 });
 
 // ======================================================================
