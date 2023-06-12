@@ -25,13 +25,18 @@ export let environment = writable({
 	n_cols: 10,
 	n_rows: 10,
 	action_cost: -1,
-	obstacles: [],
-	penalty_states: {},
-	goal_states: {},
+	obstacles: [2, 7, 14],
+	penalty_states: {
+		12: 0
+	},
+	goal_states: {
+		24: 400,
+		8: 100
+	},
 	initial_action: 0,
 	initial_value: 0,
-	terminal_states: [],
-	initial_state: 0
+	initial_state: 0,
+	terminal_states: [24, 8]
 });
 
 export let n_states = derived([environment], ([$environment]) => {

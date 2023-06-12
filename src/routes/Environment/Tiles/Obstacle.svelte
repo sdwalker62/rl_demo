@@ -2,7 +2,11 @@
 </script>
 
 <div class="canvas" style="width: {100}%; height: {100}%">
-	<div class="obstacle" />
+	<div class="obstacle">
+		<p class="icon">
+			<i id="obstacle" class="fa-solid fa-road-barrier" />
+		</p>
+	</div>
 </div>
 
 <style>
@@ -21,5 +25,21 @@
 		aspect-ratio: 1 / 1;
 		width: calc(100% - 10px);
 		height: calc(100% - 10px);
+		align-items: center;
+		justify-content: center;
+	}
+
+	.icon {
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		width: 100%;
+		height: 100%;
+	}
+
+	#obstacle {
+		color: #ff0033;
+		flex-grow: 1;
+		font-size: 3em;
 	}
 </style>

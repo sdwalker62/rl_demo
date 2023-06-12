@@ -3,18 +3,16 @@
 
 <div class="canvas" style="width: {100}%; height: {100}%">
 	<div class="standard">
-		<div class="info">
-			<p class="icon">
-				<i id="goal" class="fa-solid fa-coins" />
-			</p>
-		</div>
+		<p class="icon">
+			<i id="goal" class="fa-solid fa-coins" />
+		</p>
 	</div>
 </div>
 
 <style>
 	.canvas {
 		display: flex;
-		background: #0c0c0c;
+		background: #1f1f1f;
 		aspect-ratio: 1 / 1;
 		align-items: center;
 		justify-content: center;

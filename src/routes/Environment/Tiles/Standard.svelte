@@ -1,6 +1,8 @@
 <script>
 	import { min_reward, max_reward } from '../../../store/shared_data';
 	export let state;
+	export let width;
+	export let height;
 	const value = state.value;
 
 	const value_range = $max_reward - $min_reward;
@@ -22,7 +24,7 @@
 	const policy_action = state.policy_action;
 </script>
 
-<div class="canvas" style="width: {100}%; height: {100}%">
+<div class="canvas">
 	<div class="standard" style="background-color: {color};">
 		<div class="info">
 			<p class="icon">
@@ -48,15 +50,17 @@
 		aspect-ratio: 1 / 1;
 		align-items: center;
 		justify-content: center;
+		padding: 0px;
+		margin: 0px;
 	}
 
 	.standard {
 		background: #1f1f1f;
 		aspect-ratio: 1 / 1;
-		width: 99.5%;
-		height: 99.5%;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
+		height: 100%;
 	}
 
 	.info {
@@ -80,7 +84,7 @@
 
 	.value {
 		flex-grow: 2;
-		font-size: 1em;
+		font-size: 1.2vi;
 		font-family: 'SF Pro';
 		color: white;
 	}
