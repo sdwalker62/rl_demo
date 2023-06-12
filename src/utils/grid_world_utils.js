@@ -1,4 +1,9 @@
 /**
+ *  TODO: Sync these two functions. One was made before major code changes when SARSA was introduced.
+ * 		  I am out of time to make these changes right now.
+ */
+
+/**
  * @param {Object} environment - Gridworld information
  * @param {Object} history - history from the policy run
  */
