@@ -6,8 +6,8 @@ export let replay_history = writable([]);
 export let current_frame = writable(0);
 
 export let grid_world = writable(
-	Array.from(Array(5), () =>
-		Array(5).fill({
+	Array.from(Array(10), () =>
+		Array(10).fill({
 			type: 'standard',
 			policy_action: 0,
 			value: 0
@@ -22,8 +22,8 @@ export let number_iterations = writable(0);
 export let lag = writable(100);
 
 export let environment = writable({
-	n_cols: 5,
-	n_rows: 5,
+	n_cols: 10,
+	n_rows: 10,
 	action_cost: -1,
 	obstacles: [],
 	penalty_states: {},

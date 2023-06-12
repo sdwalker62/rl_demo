@@ -13,7 +13,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		background-color: var(--secondary-color);
+		background-color: var(--background-color);
 		width: calc(100% - 20px);
 		height: 40px;
 		margin: 5px;

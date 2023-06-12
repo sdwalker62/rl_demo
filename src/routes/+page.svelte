@@ -28,7 +28,7 @@
 		margin-left: 1em;
 		display: flex;
 		flex-direction: row;
-		max-height: calc(90vh - 50px);
+		max-height: calc(95vh - 50px);
 		width: 100vw;
 	}
 </style>

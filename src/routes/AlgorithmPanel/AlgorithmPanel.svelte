@@ -29,7 +29,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		background: #02006c;
+		background: var(--background-color);
 		width: 20%;
 		height: 100%;
 		margin: 0 1em;
