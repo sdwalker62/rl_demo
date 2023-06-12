@@ -2,6 +2,7 @@
 	import NavBar from './Navbar/NavBar.svelte';
 	import Environment from './Environment/Environment.svelte';
 	import AlgorithmPanel from './AlgorithmPanel/AlgorithmPanel.svelte';
+	import { onMount } from 'svelte';
 </script>
 
 <div class="canvas">

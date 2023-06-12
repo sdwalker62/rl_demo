@@ -21,12 +21,13 @@
 	};
 
 	let larger_axis;
-	if ($environment.n_cols > $environment.n_rows) {
-		larger_axis = $environment.n_cols;
+	let size;
+	$: if ($environment.n_cols > $environment.n_rows) {
+		size = 100 / $environment.n_cols;
 	} else {
-		larger_axis = $environment.n_rows;
+		size = 100 / $environment.n_rows;
+		console.log(size);
 	}
-	const size = 100 / larger_axis;
 </script>
 
 <div class="grid_world_container">
@@ -58,6 +59,7 @@
 	.canvas {
 		width: 100%;
 		height: 100%;
+		border-radius: 1000px;
 	}
 	.gridworld-row {
 		display: flex;

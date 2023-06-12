@@ -4,8 +4,6 @@
 	const value = state.value;
 
 	const value_range = $max_reward - $min_reward;
-	console.log($max_reward);
-	console.log($min_reward);
 	const color_ratio = value / value_range;
 
 	/**
