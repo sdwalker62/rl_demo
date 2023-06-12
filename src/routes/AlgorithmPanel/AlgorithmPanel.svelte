@@ -9,7 +9,7 @@
 </script>
 
 <div class="canvas">
-	<select bind:value={selected_algorithm}>
+	<select id="alg_select" bind:value={selected_algorithm}>
 		{#each algorithms as algorithm}
 			<option value={algorithm.id}>
 				{algorithm.text}
@@ -32,6 +32,17 @@
 		background: var(--background-color);
 		width: 20%;
 		height: 100%;
-		margin: 0 1em;
+		margin: 1em;
+	}
+
+	#alg_select {
+		height: 50px;
+		width: 95%;
+		font-size: 1.5em;
+		border-radius: 10px;
+		border-width: 0px;
+		color: white;
+		background-color: var(--transparency-color);
+		text-align: center;
 	}
 </style>

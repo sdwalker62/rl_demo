@@ -32,7 +32,6 @@
 	.icon {
 		display: inline-block;
 		text-align: center;
-		vertical-align: middle;
 		width: 100%;
 		height: 100%;
 	}

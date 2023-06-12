@@ -51,40 +51,42 @@
 </script>
 
 <div class="canvas">
-	<div>
+	<div id="iterations-container">
 		<h1 id="iters">Iterations</h1>
 		<h1 class="num-iterations">{$number_iterations}</h1>
 	</div>
-	<div>
-		<label id="n-rows-label" for="rows">Number of rows</label>
+	<div class="txtbox">
+		<i class="fa-solid fa-arrows-left-right icon" />
 		<input id="n-rows" bind:value={$environment.n_rows} />
 	</div>
-	<div>
-		<label id="n-cols-label" for="n-cols">Number of columns</label>
+	<div class="txtbox">
+		<i class="fa-solid fa-up-down icon" />
 		<input id="n-cols" bind:value={$environment.n_cols} />
 	</div>
-	<div>
-		<Slider
+	<div class="txtbox">
+		<span class="status">&gamma;: {$policy_iteration.gamma.toFixed(2)}</span>
+		<input
+			type="range"
+			min="0"
+			max="1"
+			step="0.001"
 			bind:value={$policy_iteration.gamma}
-			min={0}
-			max={1}
-			step={0.001}
-			input$aria-label="Continuous slider"
+			class="slider"
 		/>
-		<pre class="status">Gamma: {$policy_iteration.gamma}</pre>
 	</div>
-	<div>
-		<Slider
+	<div class="txtbox">
+		<span class="status">AC: {$environment.action_cost}</span>
+		<input
+			type="range"
+			min="-10"
+			max="10"
+			step="0.1"
 			bind:value={$environment.action_cost}
-			min={-10}
-			max={10}
-			step={0.1}
-			input$aria-label="Continuous slider"
+			class="slider"
 		/>
-		<pre class="status">Action Cost: {$environment.action_cost}</pre>
 	</div>
-	<div>
-		<label id="theta-label" for="theta">Theta</label>
+	<div class="txtbox">
+		<label id="theta-label" for="theta">&theta;</label>
 		<input id="theta" bind:value={$policy_iteration.theta} />
 	</div>
 	<div>
@@ -96,11 +98,15 @@
 	.canvas {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		width: 20%;
+		align-items: start;
+		justify-content: space-evenly;
+		width: 100%;
 		height: 100%;
 		margin: 0 1em;
+	}
+
+	#iterations-container {
+		width: 100%;
 	}
 
 	.start {
@@ -113,24 +119,86 @@
 		font-size: large;
 	}
 
+	.txtbox {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+	}
+
+	.icon {
+		color: white;
+		font-size: 2em;
+		width: 30px;
+	}
+
 	.num-iterations {
 		color: white;
 		text-align: center;
 		font-family: 'SF Pro';
 		font-size: 5em;
+		align-self: center;
+		justify-self: center;
 	}
 
 	#iters {
 		color: white;
 		text-align: center;
 		font-family: 'SF Pro';
+		font-weight: lighter;
+		font-size: 3em;
 	}
 
-	#n-cols-label,
-	#n-rows-label,
-	.status,
+	#theta,
+	#n-rows,
+	#n-cols {
+		color: white;
+		background-color: var(--transparency-color);
+		height: 30px;
+		width: 200px;
+		border-width: 0px;
+		border-radius: 10px;
+		text-align: center;
+		font-size: 1.2em;
+	}
+
+	.status {
+		color: white;
+		font-family: 'SF Pro';
+		font-size: 1.2em;
+		width: 80px;
+		text-align: end;
+	}
+
 	#theta-label {
 		color: white;
 		font-family: 'SF Pro';
+		font-size: 2em;
+		width: 30px;
+	}
+
+	.slider {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 60%;
+		height: 25px;
+		background: var(--transparency-color);
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: 0.2s;
+		transition: opacity 0.2s;
+	}
+
+	.slider:hover {
+		opacity: 1;
+	}
+
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		opacity: 1;
+		background: #ffffff;
+		cursor: pointer;
 	}
 </style>
