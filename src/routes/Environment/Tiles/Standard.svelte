@@ -1,16 +1,18 @@
 <script>
-	import { min_value, max_value } from '../../../store/shared_data';
+	import { min_reward, max_reward } from '../../../store/shared_data';
 	export let state;
 	const value = state.value;
 
-	const value_range = $max_value - $min_value;
+	const value_range = $max_reward - $min_reward;
+	console.log($max_reward);
+	console.log($min_reward);
 	const color_ratio = value / value_range;
 
 	/**
 	 * @param {number} value - between 0 and 1
 	 */
 	function getColor(value) {
-		var hue = (value * 200).toString(10);
+		var hue = (value * 220).toString(10);
 		return ['hsl(', hue, ', 100%, 40%)'].join('');
 	}
 	let color;

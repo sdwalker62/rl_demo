@@ -1,5 +1,4 @@
 <script>
-	import { min_value, max_value } from '../../../store/shared_data';
 	export let state;
 </script>
 

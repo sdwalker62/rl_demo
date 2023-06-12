@@ -15,8 +15,9 @@ export let grid_world = writable(
 	)
 );
 
-export let max_value = writable(100);
-export let min_value = writable(-100);
+export let max_reward = writable(0);
+export let min_reward = writable(0);
+
 export let number_iterations = writable(0);
 export let lag = writable(100);
 
@@ -32,6 +33,21 @@ export let environment = writable({
 	terminal_states: [],
 	initial_state: 0
 });
+
+export let n_states = derived([environment], ([$environment]) => {
+	return $environment.n_cols * $environment.n_rows;
+});
+
+// export let max_reward = derived([environment], ([$environment]) => {
+// 	let max_value = -100000;
+// 	for (const goal_state in Object.keys($environment.goal_states)) {
+// 		const state_value = $environment.goal_states[goal_state];
+// 		if ($environment.goal_states[goal_state] > max_value) {
+// 			max_value = state_value;
+// 		}
+// 	}
+// 	return max_value;
+// });
 
 // ======================================================================
 // Algorithm Specific Parameters

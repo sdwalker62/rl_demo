@@ -9,11 +9,36 @@
 		mechanics,
 		policy_iteration,
 		number_iterations,
-		current_frame
+		current_frame,
+		n_states,
+		min_reward,
+		max_reward
 	} from '../../store/shared_data';
 
 	$: if ($replay_history.length != 0) {
+		const extremes = get_extremes($replay_history[$current_frame]);
+		$max_reward = Number(extremes.max);
+		$min_reward = Number(extremes.min);
 		$grid_world = populate_map($environment, $replay_history, $current_frame);
+	}
+
+	function get_extremes(history) {
+		let max_reward = Number.NEGATIVE_INFINITY;
+		let min_reward = Number.POSITIVE_INFINITY;
+
+		for (let state_idx = 0; state_idx < $n_states - 1; state_idx++) {
+			const reward = history.state_values[state_idx];
+			if (max_reward <= reward) {
+				max_reward = reward;
+			}
+			if (min_reward >= reward) {
+				min_reward = reward;
+			}
+		}
+		return {
+			min: min_reward,
+			max: max_reward
+		};
 	}
 
 	function run_algorithm() {
@@ -21,7 +46,6 @@
 		strategy.solve(100);
 		replay_history.set(strategy.history);
 		$current_frame = strategy.history.length - 1;
-		// $grid_world = populate_map($environment, strategy.history, frame_idx);
 		$number_iterations = strategy.n_iterations;
 	}
 </script>
