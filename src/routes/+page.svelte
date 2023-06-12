@@ -2,7 +2,6 @@
 	import NavBar from './Navbar/NavBar.svelte';
 	import Environment from './Environment/Environment.svelte';
 	import AlgorithmPanel from './AlgorithmPanel/AlgorithmPanel.svelte';
-	import { onMount } from 'svelte';
 </script>
 
 <div class="canvas">
@@ -28,7 +27,10 @@
 		margin-left: 1em;
 		display: flex;
 		flex-direction: row;
-		max-height: calc(95vh - 50px);
-		width: 100vw;
+		/* max-height: calc(95vh - 50px); */
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		max-height: 100vh;
 	}
 </style>

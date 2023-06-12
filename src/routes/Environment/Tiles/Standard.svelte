@@ -1,8 +1,6 @@
 <script>
-	import { min_reward, max_reward } from '../../../store/shared_data';
+	import { min_reward, max_reward, n_states } from '../../../store/shared_data';
 	export let state;
-	export let width;
-	export let height;
 	const value = state.value;
 
 	const value_range = $max_reward - $min_reward;
@@ -22,11 +20,22 @@
 		color = getColor(color_ratio);
 	}
 	const policy_action = state.policy_action;
+
+	let show_arrow = true;
+	if ($n_states > 200) {
+		show_arrow = false;
+	}
+
+	let show_values = true;
+	if ($n_states > 200) {
+		show_values = false;
+	}
 </script>
 
 <div class="canvas">
-	<div class="standard" style="background-color: {color};">
+	<div class="standard" style="background-color: red;">
 		<div class="info">
+			{#if show_arrow}
 			<p class="icon">
 				{#if policy_action === 0}
 					<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
@@ -38,7 +47,10 @@
 					<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
 				{/if}
 			</p>
-			<span class="value">{value.toFixed(2)}</span>
+			{/if}
+			{#if show_values}
+				<span class="value">{value.toFixed(2)}</span>
+			{/if}
 		</div>
 	</div>
 </div>
@@ -75,6 +87,10 @@
 	.icon {
 		display: inline-block;
 		text-align: center;
+	}
+
+	.icon:after {
+		content: '\200b';
 	}
 
 	#arrow {

@@ -5,13 +5,11 @@
 	import Standard from './Standard.svelte';
 
 	export let state;
-	export let width;
-	export let height;
 </script>
 
-<div class="canvas" style="width: {width}%; height: {height}%">
+<div class="canvas">
 	{#if state.type === 'standard'}
-		<Standard {state} {width} {height} />
+		<Standard {state} />
 	{:else if state.type === 'player'}
 		<Player {state} />
 	{:else if state.type === 'obstacle'}
@@ -25,6 +23,5 @@
 	.canvas {
 		border-radius: 0px;
 		background: #1f1f1f;
-		/* aspect-ratio: 1 / 1; */
 	}
 </style>
