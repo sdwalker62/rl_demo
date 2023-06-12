@@ -3,7 +3,7 @@
 </script>
 
 <div class="canvas">
-	<span id="title">RL Demo</span>
+	<span id="title">RL Academy</span>
 	<DarkMode />
 </div>
 
@@ -23,7 +23,7 @@
 	#title {
 		margin-left: 0.5em;
 		font-family: 'SF Pro Display Medium';
-		font-size: x-large;
-		color: var(--text-color);
+		font-size: 2em;
+		color: white;
 	}
 </style>

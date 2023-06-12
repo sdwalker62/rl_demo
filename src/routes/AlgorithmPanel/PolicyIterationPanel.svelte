@@ -89,7 +89,7 @@
 		<label id="theta-label" for="theta">&theta;</label>
 		<input id="theta" bind:value={$policy_iteration.theta} />
 	</div>
-	<div>
+	<div id="button-container">
 		<button class="start" on:click={run_algorithm}> Start </button>
 	</div>
 </div>
@@ -109,11 +109,19 @@
 		width: 100%;
 	}
 
+	#button-container {
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.start {
 		margin: 10px;
-		width: 100px;
+		width: 90%;
 		height: 40px;
-		background-color: #e55934;
+		border-width: 0px;
+		border-radius: 10px;
+		background-color: #ff5733;
 		color: white;
 		font-family: 'SF Pro';
 		font-size: large;
