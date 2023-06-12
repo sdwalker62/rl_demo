@@ -2,9 +2,9 @@
 	import Tile from './Tiles/Tile.svelte';
 	import { grid_world, environment, current_frame, replay_history } from '../../store/shared_data';
 
-	$: grid_rows = `${'auto '.repeat($environment.n_rows)};`
-	$: grid_cols = `${'auto '.repeat($environment.n_cols)};`
-	$: grid_style = `grid-template-columns: ${grid_cols}; grid-template-rows: ${grid_rows};`;
+	$: grid_rows = `${`1fr `.repeat($environment.n_rows)};`;
+	$: grid_cols = `${'1fr '.repeat($environment.n_cols)};`;
+	$: grid_style = `grid-template-columns: ${grid_cols}; grid-template-rows: ${grid_rows}; gap: 0px 0px`;
 </script>
 
 <div id="background">
@@ -29,24 +29,23 @@
 
 <style>
 	#background {
-		height: 100%;
-		width: 100%;
-		max-width: 100%;
-		max-height: 100%;
 		background-color: #1f1f1f;
 		display: flex;
 		flex-direction: column;
 		box-shadow: 5px 5px 40px #0c0c0c;
-		align-items: center;
-		justify-content: center;
+		/* align-items: center;
+		justify-content: center; */
+		width: 100%;
+		height: 100%;
+		max-height: 100vh;
+		margin: 20px;
 	}
 
 	#grid-container {
 		display: grid;
-		width: 100%; 
+		width: 100%;
 		height: 100%;
-		max-width: 100%;
-		max-height: 100%;
+		max-height: 100vh;
 	}
 
 	#replay_slider {

@@ -29,26 +29,25 @@ export let environment = writable({
 	terminal_states: [24, 8]
 });
 
-// export let grid_world = writable(
-// 	Array(100).fill({
-// 			type: 'standard',
-// 			policy_action: 0,
-// 			value: 0
-// 		})
-
-// );
+export let grid_world = writable(
+	Array(100).fill({
+		type: 'standard',
+		policy_action: 0,
+		value: 0
+	})
+);
 
 export let n_states = derived([environment], ([$environment]) => {
 	return $environment.n_cols * $environment.n_rows;
 });
 
-export let grid_world = derived([environment], ([$environment]) => {
-	return 	Array($environment.n_cols * $environment.n_rows).fill({
-		type: 'standard',
-		policy_action: 0,
-		value: 0
-	})
-})
+// export let grid_world = derived([environment], ([$environment]) => {
+// 	return 	Array($environment.n_cols * $environment.n_rows).fill({
+// 		type: 'standard',
+// 		policy_action: 0,
+// 		value: 0
+// 	})
+// })
 
 // export let max_reward = derived([environment], ([$environment]) => {
 // 	let max_value = -100000;

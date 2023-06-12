@@ -33,20 +33,20 @@
 </script>
 
 <div class="canvas">
-	<div class="standard" style="background-color: red;">
+	<div class="standard" style="background-color: {color};">
 		<div class="info">
 			{#if show_arrow}
-			<p class="icon">
-				{#if policy_action === 0}
-					<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
-				{:else if policy_action === 1}
-					<i id="arrow" class="fa-solid fa-arrow-right" style="color: #ebebeb;" />
-				{:else if policy_action === 2}
-					<i id="arrow" class="fa-solid fa-arrow-down" style="color: #ebebeb;" />
-				{:else if policy_action === 3}
-					<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
-				{/if}
-			</p>
+				<p class="icon">
+					{#if policy_action === 0}
+						<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
+					{:else if policy_action === 1}
+						<i id="arrow" class="fa-solid fa-arrow-right" style="color: #ebebeb;" />
+					{:else if policy_action === 2}
+						<i id="arrow" class="fa-solid fa-arrow-down" style="color: #ebebeb;" />
+					{:else if policy_action === 3}
+						<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
+					{/if}
+				</p>
 			{/if}
 			{#if show_values}
 				<span class="value">{value.toFixed(2)}</span>
@@ -87,10 +87,6 @@
 	.icon {
 		display: inline-block;
 		text-align: center;
-	}
-
-	.icon:after {
-		content: '\200b';
 	}
 
 	#arrow {

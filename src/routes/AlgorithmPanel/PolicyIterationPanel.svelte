@@ -20,6 +20,7 @@
 		$max_reward = Number(extremes.max);
 		$min_reward = Number(extremes.min);
 		$grid_world = populate_map($environment, $replay_history, $current_frame);
+		console.log($grid_world);
 	}
 
 	function get_extremes(history) {

@@ -7,7 +7,7 @@
 	export let state;
 </script>
 
-<div class="canvas">
+<div class="tile-canvas">
 	{#if state.type === 'standard'}
 		<Standard {state} />
 	{:else if state.type === 'player'}
@@ -20,8 +20,10 @@
 </div>
 
 <style>
-	.canvas {
+	.tile-canvas {
 		border-radius: 0px;
 		background: #1f1f1f;
+		min-width: 0; /* Both of these are required because grid sets this to auto by default*/
+		min-height: 0;
 	}
 </style>

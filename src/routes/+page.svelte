@@ -18,19 +18,14 @@
 		flex-direction: column;
 		margin: 0;
 		padding: 0;
-		height: 100vh;
-		width: 100vw;
-		max-height: 100vh;
-		max-width: 100vw;
+		height: calc(100vh - 70px);
+		min-height: calc(100vh - 70px);
+		max-height: calc(100vh - 70px);
 	}
 	.board {
-		margin-left: 1em;
 		display: flex;
 		flex-direction: row;
-		/* max-height: calc(95vh - 50px); */
 		width: 100%;
 		height: 100%;
-		max-width: 100%;
-		max-height: 100vh;
 	}
 </style>
