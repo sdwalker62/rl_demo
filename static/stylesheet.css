@@ -26,6 +26,13 @@
 	gap: 10px;
 }
 
+.text-container {
+	display: flex;
+	flex-direction: column;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
 .input-label {
 	color: white;
 	font-family: 'SF Pro';

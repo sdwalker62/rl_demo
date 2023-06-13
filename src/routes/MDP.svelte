@@ -47,26 +47,29 @@
 <div id="dex-vid">
 	<iframe width="1280" height="720" src="https://www.youtube.com/embed/jwSbzNHGflM" />
 </div>
-<div id="main-page">
-	<img class="diagram" src="agent-env.svg" alt="agent and environment interation" />
+
+<div class="text-container">
+	<div id="main-page">
+		<img class="diagram" src="agent-env.svg" alt="agent and environment interation" />
+	</div>
+
+	<div id="main-page">
+		<img class="diagram" src="family.svg" alt="agent and environment interation" />
+	</div>
+
+	<p class="math-eq">{equ1}</p>
+	<p class="math-eq">{equ2}</p>
+
+	<div class="line-break" />
+	<h1 class="h1">References</h1>
+
+	<ol class="references-list">
+		<li class="references-list-item">
+			“Part 2: Kinds of RL Algorithms¶.” Part 2: Kinds of RL Algorithms - Spinning Up Documentation,
+			spinningup.openai.com/en/latest/spinningup/rl_intro2.html. Accessed 13 June 2023.
+		</li>
+	</ol>
 </div>
-
-<div id="main-page">
-	<img class="diagram" src="family.svg" alt="agent and environment interation" />
-</div>
-
-<p class="math-eq">{equ1}</p>
-<p class="math-eq">{equ2}</p>
-
-<div class="line-break" />
-<h1 class="h1">References</h1>
-
-<ol class="references-list">
-	<li class="references-list-item">
-		“Part 2: Kinds of RL Algorithms¶.” Part 2: Kinds of RL Algorithms - Spinning Up Documentation,
-		spinningup.openai.com/en/latest/spinningup/rl_intro2.html. Accessed 13 June 2023.
-	</li>
-</ol>
 
 <style>
 	#main-page {
