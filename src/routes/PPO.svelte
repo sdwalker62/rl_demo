@@ -84,7 +84,27 @@
 
 <div id="text-container">
 	<h1 class="h1">Proximal Policy Optimization</h1>
+	<figure style="text-align: center; width: 100%; align-items: center">
+		<img
+			width="854"
+			height="480"
+			class="diagram"
+			src="google_soccer.gif"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">
+			Trained PPO network in Google AI's Football environment. Credit:
+			(https://ai.googleblog.com/2019/06/introducing-google-research-football.html)
+		</figcaption>
+	</figure>
 	<h3 class="h3">Importance Sampling</h3>
+	<p class="math-eq">
+		{`$$\\mathbb{E}[f(x)] = \\int f(x)p(x)dx \\approx \\frac{1}{n} \\sum_{i}f(x_i) $$`}
+	</p>
+
+	<p class="math-eq">
+		{`$$\\mathbb{E}[f(x)] = \\int f(x)p(x)dx = \\int f(x)\\frac{p(x)}{q(x)}q(x)dx \\approx \\frac{1}{n} \\sum_{i}f(x_i)\\frac{p(x_i)}{q(x_i)}$$`}
+	</p>
 
 	<p class="math">
 		We will assume the standard notation used in Markov Decision Processes (MDP) in the rest of this
@@ -94,8 +114,8 @@
 		{`$t$`}, {`$T$`} a statistical distribution mapping state-action pairs to probability distributions
 		over next states, and {`$R: S \\times A → R$`} a reward function mapping state-action pairs to real-valued
 		rewards. Let {`$\\pi$`} be a policy that maps states to actions, {`$\\pi : S → A$`}, defining
-		the behavior of our agent throughout the environment. We will consider a
-		stochastic policy which gives a conditional distribution with parameters {`$\\theta$`} over actions
+		the behavior of our agent throughout the environment. We will consider a stochastic policy which
+		gives a conditional distribution with parameters {`$\\theta$`} over actions
 		{`$a_1, \\dots , a_{|A_s|}$`}
 		available to the agent in a state {`$s \\in S$`},
 	</p>
@@ -140,8 +160,8 @@
 	<p class="math-eq">{equ4}</p>
 
 	<p class="math">
-		for some penalty coefficient {`$\\beta$`}. It is most common to use clipped-PPO, defined as follows.
-		Let {`$rt(\\theta)$`} be the ratio of new and old policies:
+		for some penalty coefficient {`$\\beta$`}. It is most common to use clipped-PPO, defined as
+		follows. Let {`$rt(\\theta)$`} be the ratio of new and old policies:
 	</p>
 
 	<p class="math-eq">{equ5}</p>
@@ -213,6 +233,4 @@
 		font-family: 'SF Pro';
 		font-weight: 300;
 	}
-
-
 </style>

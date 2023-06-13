@@ -119,8 +119,7 @@
 	font-family: 'SF Pro';
 	font-weight: 300;
 	background: #02006c;
-	box-shadow: inset 6px 6px 12px #010050,
-				inset -6px -6px 12px #030088;
+	box-shadow: inset 6px 6px 12px #010050, inset -6px -6px 12px #030088;
 	border-radius: 10px;
 	border-width: 0px;
 }
@@ -141,6 +140,12 @@
 .h3 {
 	font-family: 'SF Pro Rounded Medium';
 	font-size: 2em;
+	color: white;
+}
+
+.caption {
+	font-family: 'SF Pro';
+	font-size: 1em;
 	color: white;
 }
 
