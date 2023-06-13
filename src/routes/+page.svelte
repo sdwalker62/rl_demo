@@ -4,6 +4,7 @@
 	import AlgorithmPanel from './AlgorithmPanel/AlgorithmPanel.svelte';
 	import MDP from './MDP.svelte';
 	import Home from './Home.svelte';
+	import PPO from './PPO.svelte';
 	import { current_page } from '../store/shared_data';
 </script>
 
@@ -13,6 +14,8 @@
 		<Home />
 	{:else if $current_page == 'mdp'}
 		<MDP />
+	{:else if $current_page == 'ppo'}
+		<PPO />
 	{:else if $current_page == 'grid_world'}
 		<div class="board">
 			<Environment />

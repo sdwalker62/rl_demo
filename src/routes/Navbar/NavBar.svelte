@@ -57,6 +57,22 @@
 				}}>Grid World</button
 			>
 		{/if}
+		{#if $current_page == 'ppo'}
+			<button
+				class="page-option"
+				style="color: red; font-weight: 900"
+				on:click={() => {
+					$current_page = 'ppo';
+				}}>Proximal Policy Optimization</button
+			>
+		{:else}
+			<button
+				class="page-option"
+				on:click={() => {
+					$current_page = 'ppo';
+				}}>Proximal Policy Optimization</button
+			>
+		{/if}
 	</div>
 	<DarkMode />
 </div>
