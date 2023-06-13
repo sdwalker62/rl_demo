@@ -113,6 +113,26 @@
 	cursor: pointer;
 }
 
+.line-break {
+	width: 100%;
+	height: 2px;
+	background-color: white;
+}
+
+.h1 {
+	font-family: 'SF Pro Rounded Medium';
+	font-size: 3em;
+	color: white;
+	margin-left: 50px;
+}
+
+.references-list-item {
+	font-size: 2em;
+	margin-left: 75px;
+	font-family: 'SF Pro Display Thin';
+	color: white;
+}
+
 /* Fonts */
 @font-face {
 	font-family: 'SF Pro';

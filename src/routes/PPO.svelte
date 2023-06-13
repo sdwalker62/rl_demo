@@ -170,6 +170,16 @@
 	<div id="ppo-alg-container">
 		<img id="ppo-alg" src="ppo-alg.jpeg" alt="agent and environment interation" />
 	</div>
+
+	<div class="line-break" />
+	<h1 class="h1">References</h1>
+
+	<ol class="references-list">
+		<li class="references-list-item">
+			“Part 2: Kinds of RL Algorithms¶.” Part 2: Kinds of RL Algorithms - Spinning Up Documentation,
+			spinningup.openai.com/en/latest/spinningup/rl_intro2.html. Accessed 13 June 2023.
+		</li>
+	</ol>
 </div>
 
 <style>
