@@ -97,6 +97,7 @@
 			(https://ai.googleblog.com/2019/06/introducing-google-research-football.html)
 		</figcaption>
 	</figure>
+
 	<h3 class="h3">Importance Sampling</h3>
 	<p class="math-eq">
 		{`$$\\mathbb{E}[f(x)] = \\int f(x)p(x)dx \\approx \\frac{1}{n} \\sum_{i}f(x_i) $$`}
@@ -106,6 +107,30 @@
 		{`$$\\mathbb{E}[f(x)] = \\int f(x)p(x)dx = \\int f(x)\\frac{p(x)}{q(x)}q(x)dx \\approx \\frac{1}{n} \\sum_{i}f(x_i)\\frac{p(x_i)}{q(x_i)}$$`}
 	</p>
 
+	<h3 class="h3">Kullback-Leibler Divergence</h3>
+	<figure style="text-align: center; width: 100%; align-items: center">
+		<img
+			width="854"
+			height="480"
+			class="diagram"
+			src="forwardkl.png"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">
+			Two distributions with overlap Credit:
+			(https://dibyaghosh.com/blog/assets/posts/kldivergence/forwardkl.png)
+		</figcaption>
+	</figure>
+	<p class="math-eq">
+		{`$$\\text{KL}[P, Q] = \\int_{\\mathcal{X}}\\log\\left(\\frac{P(dx)}{Q(dx)}P(dx) \\right)$$`}
+	</p>
+
+	<p class="math">
+		where {`$\\mathcal{X}$`} is some measurable space and {`$P$`} is absolutely continuous with respect
+		to {`$Q$`}.
+	</p>
+
+	<h3 class="h3">PPO Explained</h3>
 	<p class="math">
 		We will assume the standard notation used in Markov Decision Processes (MDP) in the rest of this
 		paper. Let the 4-tuple {`$(S, A, T, R)$`} be an MDP where {`$S$`} is a set of states which are traversable
