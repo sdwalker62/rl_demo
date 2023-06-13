@@ -2,14 +2,23 @@
 	import NavBar from './Navbar/NavBar.svelte';
 	import Environment from './Environment/Environment.svelte';
 	import AlgorithmPanel from './AlgorithmPanel/AlgorithmPanel.svelte';
+	import MDP from './MDP.svelte';
+	import Home from './Home.svelte';
+	import { current_page } from '../store/shared_data';
 </script>
 
 <div class="canvas">
 	<NavBar />
-	<div class="board">
-		<Environment />
-		<AlgorithmPanel />
-	</div>
+	{#if $current_page == 'home'}
+		<Home />
+	{:else if $current_page == 'mdp'}
+		<MDP />
+	{:else if $current_page == 'grid_world'}
+		<div class="board">
+			<Environment />
+			<AlgorithmPanel />
+		</div>
+	{/if}
 </div>
 
 <style>

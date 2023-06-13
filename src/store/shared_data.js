@@ -1,6 +1,8 @@
 import { writable, derived } from 'svelte/store';
 import { TransitionMatrix } from '../algorithms/transition_matrix';
 
+export let current_page = writable('home');
+
 export let colorMode = writable('dark');
 export let replay_history = writable([]);
 export let current_frame = writable(0);
