@@ -83,7 +83,9 @@
   } -->
 
 <div id="text-container">
-	<h1 id="title">Proximal Policy Optimization</h1>
+	<h1 class="h1">Proximal Policy Optimization</h1>
+	<h3 class="h3">Importance Sampling</h3>
+
 	<p class="math">
 		We will assume the standard notation used in Markov Decision Processes (MDP) in the rest of this
 		paper. Let the 4-tuple {`$(S, A, T, R)$`} be an MDP where {`$S$`} is a set of states which are traversable
@@ -97,7 +99,7 @@
 		{`$a_1, \\dots , a_{|A_s|}$`}
 		available to the agent in a state {`$s \\in S$`},
 	</p>
-	<p class="math">{equ1}</p>
+	<p class="math-eq">{equ1}</p>
 
 	<p class="math">
 		An approximation of state-action pairs {`$A : S \\times A → R$`}, called the advantage function,
@@ -107,7 +109,7 @@
 		techniques, we can estimate the gradient of a policy using gradient estimators,
 	</p>
 
-	<p class="math">{equ2}</p>
+	<p class="math-eq">{equ2}</p>
 
 	<p class="math">
 		where the expectation {`$\\hat{\\mathbb{E}}[\\ldots]$`} is the sample average over a finite batch
@@ -131,25 +133,25 @@
 		distributions, of the current and proposed distribution was bounded by a constant {`$\\delta$`}:
 	</p>
 
-	<p class="math">{equ3}</p>
+	<p class="math-eq">{equ3}</p>
 
 	<p class="math">To lift the constraint, we can instead solve the Lagrangian dual:</p>
 
-	<p class="math">{equ4}</p>
+	<p class="math-eq">{equ4}</p>
 
 	<p class="math">
 		for some penalty coefficient {`$\\beta$`}. It is most common to use clipped-PPO, defined as follows.
 		Let {`$rt(\\theta)$`} be the ratio of new and old policies:
 	</p>
 
-	<p class="math">{equ5}</p>
+	<p class="math-eq">{equ5}</p>
 
 	<p class="math">
 		then {`$r(\\theta_{\\text{old}})=1$`}. Instead of maximizing the objective function {`$\\hat{\\mathbb{E}} \\left[ r_t(\\theta) \\hat{A}_t\\right]$`}
 		as in TRPO we will use the objective function
 	</p>
 
-	<p class="math">{equ6}</p>
+	<p class="math-eq">{equ6}</p>
 
 	<p class="math">
 		where {`$\\epsilon$`} is a hyperparameter. The clip function limits the update to within the range
@@ -158,7 +160,7 @@
 		on the unclipped objective. In practice, we use the following objective function:
 	</p>
 
-	<p class="math">{equ7}</p>
+	<p class="math-eq">{equ7}</p>
 
 	<p class="math">
 		where {`$c_1$`} and {`$c_2$`} are coefficients, {`$S$`} denotes an entropy bonus, and {`$L_t^{VF}$`}
@@ -211,4 +213,6 @@
 		font-family: 'SF Pro';
 		font-weight: 300;
 	}
+
+
 </style>

@@ -55,8 +55,8 @@
 	<img class="diagram" src="family.svg" alt="agent and environment interation" />
 </div>
 
-<p class="math">{equ1}</p>
-<p class="math">{equ2}</p>
+<p class="math-eq">{equ1}</p>
+<p class="math-eq">{equ2}</p>
 
 <div class="line-break" />
 <h1 class="h1">References</h1>
