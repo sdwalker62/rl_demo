@@ -49,13 +49,40 @@
 </div>
 
 <div class="text-container">
-	<div id="main-page">
-		<img class="diagram" src="agent-env.svg" alt="agent and environment interation" />
-	</div>
+	<figure style="text-align: center; align-items: center">
+		<img
+			width="100%"
+			height="720"
+			class="diagram"
+			src="agent-env.svg"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">Figure 1: Agents interaction with it's environment.</figcaption>
+	</figure>
 
-	<div id="main-page">
-		<img class="diagram" src="family.svg" alt="agent and environment interation" />
-	</div>
+	<figure style="text-align: center; align-items: center">
+		<img
+			width="100%"
+			height="720"
+			class="diagram"
+			src="simple-mdp.svg"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">
+			Figure 2: Simple MDP with three states and one absorbing state.
+		</figcaption>
+	</figure>
+
+	<figure style="text-align: center; align-items: center">
+		<img
+			width="100%"
+			height="720"
+			class="diagram"
+			src="family.svg"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">Family tree of some popular RL algorithm [1]</figcaption>
+	</figure>
 
 	<p class="math-eq">{equ1}</p>
 	<p class="math-eq">{equ2}</p>
