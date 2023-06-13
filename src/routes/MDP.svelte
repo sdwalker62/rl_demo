@@ -49,6 +49,7 @@
 </div>
 
 <div class="text-container">
+	<h3 class="h3">Basics</h3>
 	<figure style="text-align: center; align-items: center">
 		<img
 			width="100%"
@@ -75,6 +76,16 @@
 
 	<figure style="text-align: center; align-items: center">
 		<img
+			width="600px"
+			class="diagram"
+			src="basic-backup.svg"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">Basic backup diagram</figcaption>
+	</figure>
+
+	<figure style="text-align: center; align-items: center">
+		<img
 			width="100%"
 			height="720"
 			class="diagram"
@@ -86,6 +97,33 @@
 
 	<p class="math-eq">{equ1}</p>
 	<p class="math-eq">{equ2}</p>
+
+	<h3 class="h3">Policy Iteration</h3>
+	<p class="math-eq">
+		{`$$\\pi_{0} \\xrightarrow{E} v_{\\pi_{0}} \\xrightarrow{I} \\pi_{1} \\xrightarrow{E} v_{\\pi_{1}} \\xrightarrow{I} \\pi_{2} \\xrightarrow{E} \\cdots \\xrightarrow{I} \\pi_{*} \\xrightarrow v_{*}$$`}
+	</p>
+	<figure style="text-align: center; align-items: center">
+		<img width="100%" class="diagram" src="pi.jpeg" alt="agent and environment interation" />
+		<figcaption class="caption">Policy Iteration Algorithm [1]</figcaption>
+	</figure>
+
+	<h3 class="h3">SARSA</h3>
+	<p class="math-eq">
+		{`$$Q(S_{t}, A_{t}) \\leftarrow Q(S_{t}, A_{t}) + \\alpha \\left[R_{t+1} + \\gamma Q(S+{t+1}, A_{t+1}) - Q(S_{t}, A_{t}) \\right]$$`}
+	</p>
+	<figure style="text-align: center; align-items: center">
+		<img
+			width="600px"
+			class="diagram"
+			src="sarsa-backup.svg"
+			alt="agent and environment interation"
+		/>
+		<figcaption class="caption">SARSA backup diagram</figcaption>
+	</figure>
+	<figure style="text-align: center; align-items: center">
+		<img width="100%" class="diagram" src="sarsa.jpeg" alt="agent and environment interation" />
+		<figcaption class="caption">SARSA algorithm</figcaption>
+	</figure>
 
 	<div class="line-break" />
 	<h1 class="h1">References</h1>
