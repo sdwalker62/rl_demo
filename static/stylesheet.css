@@ -2,8 +2,8 @@
 	background-color: var(--background);
 	--transition: all 0.5s;
 	--slider-ball: linear-gradient(145deg, #f0f0f0, #cacaca);
-	--button-background: #0075f2;
-	--button-box-shadow: inset 5px 5px 3px #0059b8, inset -5px -5px 3px #0091ff;
+	--button-background: #02006c;
+	--button-box-shadow: inset 5px 5px 3px #02005c, inset -5px -5px 3px #02007c;
 }
 
 [data-theme='dark'] {
@@ -113,6 +113,17 @@
 	cursor: pointer;
 }
 
+.math-eq {
+	color: white;
+	font-size: 1.5em;
+	font-family: 'SF Pro';
+	font-weight: 300;
+	background: #02006c;
+	box-shadow: inset 6px 6px 12px #010050, inset -6px -6px 12px #030088;
+	border-radius: 10px;
+	border-width: 0px;
+}
+
 .line-break {
 	width: 100%;
 	height: 2px;
@@ -124,6 +135,18 @@
 	font-size: 3em;
 	color: white;
 	margin-left: 50px;
+}
+
+.h3 {
+	font-family: 'SF Pro Rounded Medium';
+	font-size: 2em;
+	color: white;
+}
+
+.caption {
+	font-family: 'SF Pro';
+	font-size: 1em;
+	color: white;
 }
 
 .references-list-item {
