@@ -30,21 +30,21 @@
 	if (0 < $n_states && $n_states <= 200) {
 		icon_color = 'rgba(255, 255, 255, 0.75)';
 		icon_size = '0.7em';
-		text_size = '0.7em';
+		text_size = '1em';
 	} else if (200 < $n_states && $n_states <= 400) {
 		icon_color = 'rgba(255, 255, 255, 0.6)';
 		icon_size = '0.5em';
-		text_size = '0.5em';
+		text_size = '0.7em';
 	} else if (400 < $n_states && $n_states <= 900) {
 		icon_color = 'rgba(255, 255, 255, 0.5)';
-		icon_size = '0.2em';
+		icon_size = '0.3em';
 		text_size = '0.2em';
 	}
 </script>
 
 <div class="canvas" style="background-color: {color};">
 	{#if show_arrow}
-		<p class="icon">
+		<div class="icon">
 			{#if policy_action === 0}
 				<i class="fa-solid fa-arrow-up" style="color: {icon_color}; font-size: {icon_size}" />
 			{:else if policy_action === 1}
@@ -54,7 +54,7 @@
 			{:else if policy_action === 3}
 				<i class="fa-solid fa-arrow-left" style="color: {icon_color}; font-size: {icon_size}" />
 			{/if}
-		</p>
+		</div>
 	{/if}
 	{#if show_values}
 		<span class="value" style="font-size: {text_size}">{value.toFixed(2)}</span>
@@ -63,31 +63,32 @@
 
 <style>
 	.canvas {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto;
 		background: #1f1f1f;
-		/* aspect-ratio: 1 / 1; */
-		align-items: center;
-		justify-content: space-between;
 		padding: 0px;
 		margin: 0px;
 		width: 100%;
 		height: 100%;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.icon {
-		display: block;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
 		text-align: center;
-		width: 50%;
+		justify-self: center;
+		width: 100%;
 		height: 100%;
-		margin: 0px;
 	}
 
 	.value {
-		flex-grow: 2;
 		font-family: 'SF Pro';
 		color: white;
-		height: 50%;
+		height: 100%;
 		width: 100%;
 		text-align: center;
 	}
