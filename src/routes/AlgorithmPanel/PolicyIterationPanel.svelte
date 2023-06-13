@@ -86,7 +86,7 @@
 		/>
 	</div>
 	<div class="input-box-container">
-		<label class="text-box-label" for="theta">&theta;</label>
+		<label class="input-label" for="theta">&theta;</label>
 		<input class="text-box" bind:value={$policy_iteration.theta} />
 	</div>
 	<div class="button-container">

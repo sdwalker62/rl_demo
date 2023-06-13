@@ -22,14 +22,15 @@
 .input-box-container {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	gap: 10px;
 }
 
-.text-box-label {
+.input-label {
 	color: white;
 	font-family: 'SF Pro';
-	font-size: 2em;
-	width: 30px;
+	font-size: 1em;
+	width: 60px;
 }
 
 .text-box {
@@ -89,7 +90,7 @@
 .algorithm-slider {
 	-webkit-appearance: none;
 	appearance: none;
-	width: 60%;
+	width: 100%;
 	height: 25px;
 	background: var(--transparency-color);
 	outline: none;

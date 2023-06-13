@@ -2,7 +2,15 @@
 	import Slider from '@smui/slider';
 	import { QLearning } from '../../algorithms/q_learning';
 	import { render_board } from '../../utils/grid_world_utils';
-	import { grid_world, environment, mechanics, q_learning, lag } from '../../store/shared_data';
+	import {
+		grid_world,
+		environment,
+		mechanics,
+		q_learning,
+		lag,
+		max_reward,
+		min_reward
+	} from '../../store/shared_data';
 
 	/**
 	 * Sleep function needed for the episode renderer
@@ -21,6 +29,12 @@
 		let max_Q_value = -100_000;
 		let best_action = 0;
 		for (const action in Object.keys(Q)) {
+			if (Q[action] >= $max_reward) {
+				$max_reward = Q[action];
+			}
+			if (Q[action] <= $min_reward) {
+				$min_reward = Q[action];
+			}
 			if (Q[action] > max_Q_value) {
 				max_Q_value = Q[action];
 				best_action = Number(action);
@@ -94,7 +108,7 @@
 		<input class="text-box" bind:value={$environment.n_cols} />
 	</div>
 	<div class="input-box-container">
-		<span class="slider-label">&epsilon;: {$q_learning.epsilon}</span>
+		<span class="input-label">&epsilon;: {$q_learning.epsilon}</span>
 		<input
 			type="range"
 			bind:value={$q_learning.epsilon}
@@ -105,7 +119,7 @@
 		/>
 	</div>
 	<div class="input-box-container">
-		<span class="slider-label">&gamma;: {$q_learning.gamma}</span>
+		<span class="input-label">&gamma;: {$q_learning.gamma}</span>
 		<input
 			type="range"
 			bind:value={$q_learning.gamma}
@@ -116,7 +130,7 @@
 		/>
 	</div>
 	<div class="input-box-container">
-		<span class="slider-label">&alpha;: {$q_learning.alpha}</span>
+		<span class="input-label">&alpha;: {$q_learning.alpha}</span>
 		<input
 			type="range"
 			bind:value={$q_learning.alpha}
@@ -127,23 +141,23 @@
 		/>
 	</div>
 	<div class="input-box-container">
-		<label class="text-box-label" for="theta">Max Steps Per Episode</label>
+		<label class="input-label" for="theta">Steps</label>
 		<input class="text-box" bind:value={$q_learning.max_steps_per_episode} />
 	</div>
 	<div class="input-box-container">
-		<label class="text-box-label" for="theta">Number of Episode</label>
+		<label class="input-label" for="theta">Episodes</label>
 		<input class="text-box" bind:value={$q_learning.num_episodes} />
 	</div>
 	<div class="input-box-container">
-		<label class="text-box-label" for="theta">Action Cost</label>
+		<label class="input-label" for="theta">AC</label>
 		<input class="text-box" bind:value={$environment.action_cost} />
 	</div>
 	<div class="input-box-container">
+		<span class="input-label">Render Speed (ms): {$lag}</span>
 		<input type="range" bind:value={$lag} min={0} max={100} step={10} class="algorithm-slider" />
-		<pre class="status">Render Speed (ms): {$lag}</pre>
 	</div>
 	<div class="input-box-container">
-		<label class="text-box-label" for="theta">Number of Episodes Between Renders</label>
+		<label class="input-label" for="theta">Number of Episodes Between Renders</label>
 		<input class="text-box" bind:value={$q_learning.render_idx_step} />
 	</div>
 	<div class="button-container">
@@ -152,9 +166,4 @@
 </div>
 
 <style>
-	.status,
-	#theta-label {
-		color: white;
-		font-family: 'SF Pro';
-	}
 </style>

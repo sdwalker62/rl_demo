@@ -11,7 +11,7 @@
 	{#if state.type === 'standard'}
 		<Standard {state} />
 	{:else if state.type === 'player'}
-		<Player {state} />
+		<Player />
 	{:else if state.type === 'obstacle'}
 		<Obstacle />
 	{:else if state.type === 'goal'}

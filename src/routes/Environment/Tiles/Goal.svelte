@@ -4,12 +4,16 @@
 <div class="canvas" style="width: {100}%; height: {100}%">
 	<div class="standard">
 		<p class="icon">
-			<i id="goal" class="fa-solid fa-coins" />
+			<i id="goal" class="fa-solid fa-coins center" />
 		</p>
 	</div>
 </div>
 
 <style>
+	.standard {
+		width: 100%;
+		height: 100%;
+	}
 	.canvas {
 		display: flex;
 		background: #1f1f1f;
@@ -21,6 +25,8 @@
 	.icon {
 		display: inline-block;
 		text-align: center;
+		width: 100%;
+		height: 100%;
 	}
 
 	#goal {

@@ -21,83 +21,74 @@
 	}
 	const policy_action = state.policy_action;
 
+	// Sizes breakpoints for icons
+	let icon_size = '1em';
+	let text_size = '1em';
+	let icon_color = 'rgba(255, 255, 255, 1)';
 	let show_arrow = true;
-	if ($n_states > 200) {
-		show_arrow = false;
-	}
-
 	let show_values = true;
-	if ($n_states > 200) {
-		show_values = false;
+	if (0 < $n_states && $n_states <= 200) {
+		icon_color = 'rgba(255, 255, 255, 0.75)';
+		icon_size = '0.7em';
+		text_size = '0.7em';
+	} else if (200 < $n_states && $n_states <= 400) {
+		icon_color = 'rgba(255, 255, 255, 0.6)';
+		icon_size = '0.5em';
+		text_size = '0.5em';
+	} else if (400 < $n_states && $n_states <= 900) {
+		icon_color = 'rgba(255, 255, 255, 0.5)';
+		icon_size = '0.2em';
+		text_size = '0.2em';
 	}
 </script>
 
-<div class="canvas">
-	<div class="standard" style="background-color: {color};">
-		<div class="info">
-			{#if show_arrow}
-				<p class="icon">
-					{#if policy_action === 0}
-						<i id="arrow" class="fa-solid fa-arrow-up" style="color: #ebebeb;" />
-					{:else if policy_action === 1}
-						<i id="arrow" class="fa-solid fa-arrow-right" style="color: #ebebeb;" />
-					{:else if policy_action === 2}
-						<i id="arrow" class="fa-solid fa-arrow-down" style="color: #ebebeb;" />
-					{:else if policy_action === 3}
-						<i id="arrow" class="fa-solid fa-arrow-left" style="color: #ebebeb;" />
-					{/if}
-				</p>
+<div class="canvas" style="background-color: {color};">
+	{#if show_arrow}
+		<p class="icon">
+			{#if policy_action === 0}
+				<i class="fa-solid fa-arrow-up" style="color: {icon_color}; font-size: {icon_size}" />
+			{:else if policy_action === 1}
+				<i class="fa-solid fa-arrow-right" style="color: {icon_color}; font-size: {icon_size}" />
+			{:else if policy_action === 2}
+				<i class="fa-solid fa-arrow-down" style="color: {icon_color}; font-size: {icon_size}" />
+			{:else if policy_action === 3}
+				<i class="fa-solid fa-arrow-left" style="color: {icon_color}; font-size: {icon_size}" />
 			{/if}
-			{#if show_values}
-				<span class="value">{value.toFixed(2)}</span>
-			{/if}
-		</div>
-	</div>
+		</p>
+	{/if}
+	{#if show_values}
+		<span class="value" style="font-size: {text_size}">{value.toFixed(2)}</span>
+	{/if}
 </div>
 
 <style>
 	.canvas {
 		display: flex;
+		flex-direction: column;
 		background: #1f1f1f;
-		aspect-ratio: 1 / 1;
+		/* aspect-ratio: 1 / 1; */
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
 		padding: 0px;
 		margin: 0px;
-	}
-
-	.standard {
-		background: #1f1f1f;
-		aspect-ratio: 1 / 1;
-		align-items: center;
-		justify-content: center;
 		width: 100%;
 		height: 100%;
-	}
-
-	.info {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		height: 100%;
-		justify-content: center;
-		align-items: center;
 	}
 
 	.icon {
-		display: inline-block;
+		display: block;
 		text-align: center;
-	}
-
-	#arrow {
-		flex-grow: 1;
-		font-size: 1em;
+		width: 50%;
+		height: 100%;
+		margin: 0px;
 	}
 
 	.value {
 		flex-grow: 2;
-		font-size: 1.2vi;
 		font-family: 'SF Pro';
 		color: white;
+		height: 50%;
+		width: 100%;
+		text-align: center;
 	}
 </style>
