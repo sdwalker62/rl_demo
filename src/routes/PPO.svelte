@@ -92,7 +92,7 @@
 		{`$t$`}, {`$T$`} a statistical distribution mapping state-action pairs to probability distributions
 		over next states, and {`$R: S \\times A → R$`} a reward function mapping state-action pairs to real-valued
 		rewards. Let {`$\\pi$`} be a policy that maps states to actions, {`$\\pi : S → A$`}, defining
-		the behavior of our agent throughout the environment. In this paper, we will consider a
+		the behavior of our agent throughout the environment. We will consider a
 		stochastic policy which gives a conditional distribution with parameters {`$\\theta$`} over actions
 		{`$a_1, \\dots , a_{|A_s|}$`}
 		available to the agent in a state {`$s \\in S$`},
@@ -102,7 +102,7 @@
 	<p class="math">
 		An approximation of state-action pairs {`$A : S \\times A → R$`}, called the advantage function,
 		estimates the delta of taking specific actions in a state compared to the average value of
-		state-action pairs in that state: {`$A(s, a) = Q(s, a)−V(s)$`} where
+		state-action pairs in that state: {`$A(s, a) = Q(s, a) - V(s)$`} where
 		{`$V: S → R$`} is the value-function for a state {`$s \\in S$`}. Using common optimization
 		techniques, we can estimate the gradient of a policy using gradient estimators,
 	</p>
@@ -112,7 +112,7 @@
 	<p class="math">
 		where the expectation {`$\\hat{\\mathbb{E}}[\\ldots]$`} is the sample average over a finite batch
 		of complete or truncated trajectories. Policy gradient algorithms alternate between sampling from
-		these trajectories and optimization. Empirically, performing sequen- tial optimizations on the same
+		these trajectories and optimization. Empirically, performing sequential optimizations on the same
 		sample trajectory leads to destructively large policy updates. The bad policy generated from this
 		process yields bad samples, which are fed into our optimization algorithm and ultimately lead to
 		an even worse policy after repeating the same process. If, instead, we perform one or two optimization
@@ -122,12 +122,12 @@
 
 	<p class="math">
 		To solve this data inefficiency, we could use a replay buffer, as is common in deep Q-networks.
-		Unfortunately, this will not work since samples from a replay buffer will contain trajec- tories
+		Unfortunately, this will not work since samples from a replay buffer will contain trajectories
 		generated from various policies. We require trajectories only from the current policy to
 		calculate an accurate gradient. Trusted Region Policy Optimization (TRPO) improved the sampling
 		efficiency by using importance sampling to evaluate the properties of a hypothetical policy
 		distribution using only samples from the current distribution. To improve the stability of each
-		update, the Kullback–Leibler divergence, a distance measure between two statistical
+		update, the Kullback-Leibler divergence, a distance measure between two statistical
 		distributions, of the current and proposed distribution was bounded by a constant {`$\\delta$`}:
 	</p>
 
@@ -138,9 +138,8 @@
 	<p class="math">{equ4}</p>
 
 	<p class="math">
-		or some penalty coefficient {`$\\beta$`}. This paper will use clipped-PPO, defined as follows.
-		Let
-		{`$rt(\\theta)$`} be the ratio of new and old policies:
+		for some penalty coefficient {`$\\beta$`}. It is most common to use clipped-PPO, defined as follows.
+		Let {`$rt(\\theta)$`} be the ratio of new and old policies:
 	</p>
 
 	<p class="math">{equ5}</p>
@@ -203,6 +202,7 @@
 		width: 100%;
 		justify-content: center;
 		align-items: center;
+		text-align: center;
 	}
 
 	.math {
