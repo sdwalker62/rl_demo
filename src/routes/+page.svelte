@@ -14,18 +14,17 @@
 
 <style>
 	.canvas {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
 		margin: 0;
 		padding: 0;
-		height: calc(100vh - 70px);
-		min-height: calc(100vh - 70px);
-		max-height: calc(100vh - 70px);
 	}
 	.board {
 		display: flex;
 		flex-direction: row;
 		width: 100%;
 		height: 100%;
+		max-height: calc(100vh - 100px); /* 30 from nav, 2*20 for margin, 30 for scroll bar */
 	}
 </style>

@@ -39,6 +39,10 @@
 		icon_color = 'rgba(255, 255, 255, 0.5)';
 		icon_size = '0.3em';
 		text_size = '0.2em';
+	} else if (900 < $n_states) {
+		icon_color = 'rgba(255, 255, 255, 0.4)';
+		icon_size = '0.2em';
+		text_size = '0.1em';
 	}
 </script>
 

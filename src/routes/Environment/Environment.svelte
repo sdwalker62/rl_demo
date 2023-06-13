@@ -35,16 +35,17 @@
 		box-shadow: 5px 5px 40px #0c0c0c;
 		width: 100%;
 		height: 100%;
-		max-height: 100vh;
 		margin: 20px;
 		justify-content: space-between;
 	}
 
 	#grid-container {
 		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
 		width: 100%;
-		height: calc(100% - 30px);
-		max-height: calc(100% - 90px);
+		height: 100%;
+		min-height: calc(100vh - 100px);
 	}
 
 	#replay_slider {
