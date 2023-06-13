@@ -76,7 +76,7 @@
 		padding: 5px;
 		position: relative;
 		transform: scale(1.5);
-		background-color: var(--button-background);
+		background-color: #02006c;
 		box-shadow: var(--button-box-shadow);
 		transition: var(--transition);
 		cursor: pointer;
