@@ -8,7 +8,7 @@
 	];
 </script>
 
-<div class="canvas">
+<div class="algorithm-canvas">
 	<select id="alg_select" bind:value={selected_algorithm}>
 		{#each algorithms as algorithm}
 			<option value={algorithm.id}>
@@ -24,7 +24,7 @@
 </div>
 
 <style>
-	.canvas {
+	.algorithm-canvas {
 		display: flex;
 		flex-direction: column;
 		align-items: center;

@@ -2,7 +2,15 @@
 	import Slider from '@smui/slider';
 	import { QLearning } from '../../algorithms/q_learning';
 	import { render_board } from '../../utils/grid_world_utils';
-	import { grid_world, environment, mechanics, q_learning, lag } from '../../store/shared_data';
+	import {
+		grid_world,
+		environment,
+		mechanics,
+		q_learning,
+		lag,
+		max_reward,
+		min_reward
+	} from '../../store/shared_data';
 
 	/**
 	 * Sleep function needed for the episode renderer
@@ -21,6 +29,12 @@
 		let max_Q_value = -100_000;
 		let best_action = 0;
 		for (const action in Object.keys(Q)) {
+			if (Q[action] >= $max_reward) {
+				$max_reward = Q[action];
+			}
+			if (Q[action] <= $min_reward) {
+				$min_reward = Q[action];
+			}
 			if (Q[action] > max_Q_value) {
 				max_Q_value = Q[action];
 				best_action = Number(action);
@@ -84,109 +98,72 @@
 	}
 </script>
 
-<div class="canvas">
-	<div>
-		<label id="n-rows-label" for="rows">Number of rows</label>
-		<input id="n-rows" bind:value={$environment.n_rows} />
+<div class="algorithm-controls-canvas">
+	<div class="input-box-container">
+		<i class="fa-solid fa-arrows-left-right icon" />
+		<input class="text-box" bind:value={$environment.n_rows} />
 	</div>
-	<div>
-		<label id="n-cols-label" for="n-cols">Number of columns</label>
-		<input id="n-cols" bind:value={$environment.n_cols} />
+	<div class="input-box-container">
+		<i class="fa-solid fa-up-down icon" />
+		<input class="text-box" bind:value={$environment.n_cols} />
 	</div>
-	<div>
-		<Slider
+	<div class="input-box-container">
+		<span class="input-label">&epsilon;: {$q_learning.epsilon}</span>
+		<input
+			type="range"
 			bind:value={$q_learning.epsilon}
 			min={0}
 			max={1}
 			step={0.001}
-			input$aria-label="Continuous slider"
+			class="algorithm-slider"
 		/>
-		<pre class="status">&epsilon;: {$q_learning.epsilon}</pre>
 	</div>
-	<div>
-		<Slider
+	<div class="input-box-container">
+		<span class="input-label">&gamma;: {$q_learning.gamma}</span>
+		<input
+			type="range"
 			bind:value={$q_learning.gamma}
 			min={0}
 			max={1}
 			step={0.001}
-			input$aria-label="Continuous slider"
+			class="algorithm-slider"
 		/>
-		<pre class="status">&gamma;: {$q_learning.gamma}</pre>
 	</div>
-	<div>
-		<Slider
+	<div class="input-box-container">
+		<span class="input-label">&alpha;: {$q_learning.alpha}</span>
+		<input
+			type="range"
 			bind:value={$q_learning.alpha}
 			min={0}
 			max={1}
 			step={0.001}
-			input$aria-label="Continuous slider"
+			class="algorithm-slider"
 		/>
-		<pre class="status">&alpha;: {$q_learning.alpha}</pre>
 	</div>
-	<div>
-		<label id="theta-label" for="theta">Max Steps Per Episode</label>
-		<input id="theta" bind:value={$q_learning.max_steps_per_episode} />
+	<div class="input-box-container">
+		<label class="input-label" for="theta">Steps</label>
+		<input class="text-box" bind:value={$q_learning.max_steps_per_episode} />
 	</div>
-	<div>
-		<label id="theta-label" for="theta">Number of Episode</label>
-		<input id="theta" bind:value={$q_learning.num_episodes} />
+	<div class="input-box-container">
+		<label class="input-label" for="theta">Episodes</label>
+		<input class="text-box" bind:value={$q_learning.num_episodes} />
 	</div>
-	<div>
-		<label id="theta-label" for="theta">Action Cost</label>
-		<input id="theta" bind:value={$environment.action_cost} />
+	<div class="input-box-container">
+		<label class="input-label" for="theta">AC</label>
+		<input class="text-box" bind:value={$environment.action_cost} />
 	</div>
-	<div>
-		<Slider bind:value={$lag} min={0} max={100} step={10} input$aria-label="Continuous slider" />
-		<pre class="status">Render Speed (ms): {$lag}</pre>
+	<div class="input-box-container">
+		<span class="input-label">Render Speed (ms): {$lag}</span>
+		<input type="range" bind:value={$lag} min={0} max={100} step={10} class="algorithm-slider" />
 	</div>
-	<div>
-		<label id="theta-label" for="theta">Number of Episodes Between Renders</label>
-		<input id="theta" bind:value={$q_learning.render_idx_step} />
+	<div class="input-box-container">
+		<label class="input-label" for="theta">Number of Episodes Between Renders</label>
+		<input class="text-box" bind:value={$q_learning.render_idx_step} />
 	</div>
-	<div>
-		<button class="start" on:click={run_algorithm}> Start </button>
+	<div class="button-container">
+		<button class="run-button" on:click={run_algorithm}> Start </button>
 	</div>
 </div>
 
 <style>
-	.canvas {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		width: 20%;
-		height: 100%;
-		margin: 0 1em;
-	}
-
-	.start {
-		margin: 10px;
-		width: 100px;
-		height: 40px;
-		background-color: #e55934;
-		color: white;
-		font-family: 'SF Pro';
-		font-size: large;
-	}
-
-	.num-iterations {
-		color: white;
-		text-align: center;
-		font-family: 'SF Pro';
-		font-size: 5em;
-	}
-
-	#iters {
-		color: white;
-		text-align: center;
-		font-family: 'SF Pro';
-	}
-
-	#n-cols-label,
-	#n-rows-label,
-	.status,
-	#theta-label {
-		color: white;
-		font-family: 'SF Pro';
-	}
 </style>

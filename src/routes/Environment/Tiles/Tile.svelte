@@ -5,15 +5,13 @@
 	import Standard from './Standard.svelte';
 
 	export let state;
-	export let width;
-	export let height;
 </script>
 
-<div class="canvas" style="width: {width}%; height: {height}%">
+<div class="tile-canvas">
 	{#if state.type === 'standard'}
-		<Standard {state} {width} {height} />
+		<Standard {state} />
 	{:else if state.type === 'player'}
-		<Player {state} />
+		<Player />
 	{:else if state.type === 'obstacle'}
 		<Obstacle />
 	{:else if state.type === 'goal'}
@@ -22,9 +20,10 @@
 </div>
 
 <style>
-	.canvas {
+	.tile-canvas {
 		border-radius: 0px;
 		background: #1f1f1f;
-		/* aspect-ratio: 1 / 1; */
+		min-width: 0; /* Both of these are required because grid sets this to auto by default*/
+		min-height: 0;
 	}
 </style>

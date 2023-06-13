@@ -2,26 +2,16 @@
 	import Tile from './Tiles/Tile.svelte';
 	import { grid_world, environment, current_frame, replay_history } from '../../store/shared_data';
 
-	let size;
-	$: if ($environment.n_cols > $environment.n_rows) {
-		size = 100 / $environment.n_cols;
-	} else {
-		size = 100 / $environment.n_rows;
-		console.log(size);
-	}
-	let width = 80 / $environment.n_cols;
-	let height = 80 / $environment.n_rows;
+	$: grid_rows = `${'1fr '.repeat($environment.n_rows)};`;
+	$: grid_cols = `${'1fr '.repeat($environment.n_cols)};`;
+	$: grid_style = `grid-template-columns: ${grid_cols}; grid-template-rows: ${grid_rows}; gap: 0px 0px`;
 </script>
 
 <div id="background">
 	{#key $grid_world}
-		<div class="canvas">
-			{#each $grid_world as row}
-				<div class="gridworld-row">
-					{#each row as state}
-						<Tile {state} {width} {height} />
-					{/each}
-				</div>
+		<div id="grid-container" style={grid_style}>
+			{#each $grid_world as state}
+				<Tile {state} />
 			{/each}
 		</div>
 	{/key}
@@ -39,24 +29,23 @@
 
 <style>
 	#background {
-		height: 95vh;
-		width: 95vw;
 		background-color: #1f1f1f;
 		display: flex;
 		flex-direction: column;
 		box-shadow: 5px 5px 40px #0c0c0c;
-		align-items: center;
-		justify-content: center;
+		width: 100%;
+		height: 100%;
+		margin: 20px;
+		justify-content: space-between;
 	}
-	.canvas {
-		width: 99.5%;
-		height: 96%;
-		align-items: center;
-		justify-content: center;
-	}
-	.gridworld-row {
-		display: flex;
-		flex-direction: row;
+
+	#grid-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		width: 100%;
+		height: 100%;
+		min-height: calc(100vh - 100px);
 	}
 
 	#replay_slider {

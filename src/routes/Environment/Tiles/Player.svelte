@@ -1,59 +1,34 @@
 <script>
-	export let state;
+	import { n_states } from '../../../store/shared_data';
+
+	// Sizes breakpoints for icons
+	let icon_size;
+	if (0 < $n_states && $n_states <= 200) {
+		icon_size = '2.5em';
+	} else if (200 < $n_states && $n_states <= 400) {
+		icon_size = '.8em';
+	} else if (400 < $n_states && $n_states <= 900) {
+		icon_size = '0.5em';
+	}
 </script>
 
-<div class="canvas" style="width: {100}%; height: {100}%">
-	<div class="standard">
-		<div class="info">
-			<p class="icon">
-				<i id="player" class="fa-solid fa-robot" />
-			</p>
-		</div>
-	</div>
+<div class="canvas">
+	<i id="player" class="fa-solid fa-robot" style="font-size: {icon_size}" />
 </div>
 
 <style>
 	.canvas {
-		display: flex;
-		background: #0c0c0c;
-		aspect-ratio: 1 / 1;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		background: #1f1f1f;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.standard {
-		background: #0c0c0c;
-		aspect-ratio: 1 / 1;
-		width: 99.5%;
-		height: 99.5%;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.info {
-		display: flex;
-		flex-direction: column;
 		width: 100%;
 		height: 100%;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.icon {
-		display: inline-block;
-		text-align: center;
 	}
 
 	#player {
 		color: #ffffff;
-		flex-grow: 1;
-		font-size: 3em;
-	}
-
-	.value {
-		flex-grow: 2;
-		font-size: 1em;
-		font-family: 'SF Pro';
-		color: white;
 	}
 </style>
